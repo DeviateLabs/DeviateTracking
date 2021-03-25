@@ -1,11 +1,3 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
 ___INFO___
 
 {
@@ -14,7 +6,12 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "123 Deviate Tracking Facebook Conversions API Tag",
-    "categories": ["CONVERSIONS", "ADVERTISING", "ATTRIBUTION", "REMARKETING"],
+  "categories": [
+    "CONVERSIONS",
+    "ADVERTISING",
+    "ATTRIBUTION",
+    "REMARKETING"
+  ],
   "brand": {
     "id": "Deviate Tracking",
     "displayName": "Deviate Tracking",
@@ -31,6 +28,33 @@ ___TEMPLATE_PARAMETERS___
 
 [
   {
+    "type": "LABEL",
+    "name": "Notice",
+    "displayName": "This tracking tag type requires a paid subscription, you can sign up for a free trial at https://deviatetracking.com",
+    "enablingConditions": [
+      {
+        "paramName": "pixelId",
+        "paramValue": "",
+        "type": "NOT_PRESENT"
+      },
+      {
+        "paramName": "FBToken",
+        "paramValue": "",
+        "type": "NOT_PRESENT"
+      },
+      {
+        "paramName": "apiAccessToken",
+        "paramValue": "",
+        "type": "NOT_PRESENT"
+      },
+      {
+        "paramName": "LicensedEmail",
+        "paramValue": "",
+        "type": "NOT_PRESENT"
+      }
+    ]
+  },
+  {
     "type": "TEXT",
     "name": "pixelId",
     "displayName": "Facebook Pixel ID",
@@ -41,7 +65,8 @@ ___TEMPLATE_PARAMETERS___
     "type": "TEXT",
     "name": "FBToken",
     "displayName": "Facebook Token",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Please review the help documentation to get an access token: https://developers.facebook.com/docs/marketing-api/conversions-api/get-started#access-token"
   },
   {
     "type": "TEXT",
@@ -844,7 +869,7 @@ if (getCookieValues('_fbp').length > 0) {
     {"event_name": data.StandardEvents,
       "event_time": evtime,
       "event_id": data.DeduplicationEventID,
-      "event_source_url": getUrl(),
+      "event_source_url": getUrl(), "action_source": "website",
       "user_data": {"client_user_agent": gtmData.ua, "client_ip_address": gtmData.ip, "fbc":getCookieValues('_fbc', false)[0], "fbp":getCookieValues('_fbc', false)[0]},
       "custom_data": {"content_category": data.content_category,
         "content_ids": data.content_ids,
