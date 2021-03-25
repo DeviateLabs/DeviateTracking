@@ -166,6 +166,18 @@ ___TEMPLATE_PARAMETERS___
     "help": "You can use as many different types as you\u0027d like, but Facebook limits their aggregated data set to only up to a maximum of 8 events, which can be set in the event manager. Use the drop down and choose a type of event to track standard events. Standard events also support parameter objects with specific object properties, which allow you to include detailed information about an event. For a full description of events please visit https://developers.facebook.com/docs/facebook-pixel/reference"
   },
   {
+    "type": "LABEL",
+    "name": "Purchase Type Notice",
+    "displayName": "**Currency Type and Purchase Value MUST be set in OBJECT PROPERTIES or no events will be submitted**",
+    "enablingConditions": [
+      {
+        "paramName": "StandardEvents",
+        "paramValue": "Purchase",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
     "type": "GROUP",
     "name": "ObjectProperties",
     "displayName": "Object Property",
