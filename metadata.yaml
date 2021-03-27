@@ -1,5 +1,5 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
-  - sha: 7648f0f2ea28990ba9aa5350e5684e4a713f392b
+  - sha: a6cdb15846835bc48cf4942da0c3adb7c24e9326
     changeNotes: Initial release.
