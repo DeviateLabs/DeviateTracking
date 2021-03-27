@@ -907,7 +907,7 @@ if (getCookieValues('_fbp').length > 0) {
         "&additional_data=" + encodeUriComponent(objprop) +
         "&product_id=DeviateToolsCapi_Prod" +
         "&fbpixel_id=" + encodeUriComponent(pixelId) +
-        "&test_event_code=" + encodeUriComponent(testevlabel);
+        "&test_event_code=" + testevlabel;
 
   sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
 
