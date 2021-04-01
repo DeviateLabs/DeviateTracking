@@ -2,4 +2,4 @@ homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
   - sha: 39d4d237d02b97a35025dc5b720272c62d49e2cc
-    changeNotes: Initial release.
+    changeNotes: v2
