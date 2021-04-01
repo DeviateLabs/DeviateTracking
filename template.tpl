@@ -281,39 +281,14 @@ ___TEMPLATE_PARAMETERS___
         "name": "content_name",
         "displayName": "content_name",
         "simpleValueType": true,
+        "help": "Name of the page/product",
         "enablingConditions": [
           {
             "paramName": "StandardEvents",
-            "paramValue": "AddToCart",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "StandardEvents",
-            "paramValue": "AddToWishlist",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "StandardEvents",
-            "paramValue": "CompleteRegistration",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "StandardEvents",
-            "paramValue": "Lead",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "StandardEvents",
-            "paramValue": "Purchase",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "StandardEvents",
-            "paramValue": "ViewContent",
-            "type": "EQUALS"
+            "paramValue": "PageView",
+            "type": "NOT_EQUALS"
           }
-        ],
-        "help": "Name of the page/product"
+        ]
       },
       {
         "type": "TEXT",
