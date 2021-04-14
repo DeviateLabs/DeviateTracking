@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Deviate Tracking Facebook Conversions API Tag",
+  "displayName": "Facebook Conversions API (CAPI) by Deviate Tracking",
   "categories": [
     "CONVERSIONS",
     "ADVERTISING",
