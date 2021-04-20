@@ -1,5 +1,7 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
+  - sha: 68b52ad5913e34d2755aac287d87b2d37425a81a
+    changeNotes: Update icon
   - sha: 3d08f8f153fc75027d501e2609d3226550db832c
     changeNotes: v3
