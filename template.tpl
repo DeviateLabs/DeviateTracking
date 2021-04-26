@@ -883,7 +883,7 @@ if (getCookieValues('_fbp').length > 0) {
 
   //send Get Request to Deviate Tracking API
   //eslint-disable-next-line prefer-template
-  const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate/?" +
+  const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate?" +
         "license_key=" + encodeUriComponent(lickey) +
         "&email=" + encodeUriComponent(licemail) +
         "&fbaccess_tkn=" + encodeUriComponent(fbtkn) +
