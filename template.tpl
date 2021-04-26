@@ -776,9 +776,113 @@ ___TEMPLATE_PARAMETERS___
         ],
         "notSetText": "This parameter is required for the Purchase Event",
         "help": "The value of a user performing this event to the business."
+      },
+      {
+        "type": "TEXT",
+        "name": "delivery_category",
+        "displayName": "Delivery category",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "order_id",
+        "displayName": "Order ID",
+        "simpleValueType": true
       }
     ],
     "help": "These are extra parameters you can send along with your event, some of which are required by standard events."
+  },
+  {
+    "type": "GROUP",
+    "name": "UserDataParameters",
+    "displayName": "User Data Parameters",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "LABEL",
+        "name": "UserDataNotice",
+        "displayName": "Note that IP Address, FBC Click ID, FBP Browser Id and user agent are all automatically sent by Deviate Tracking and do not need to be added here."
+      },
+      {
+        "type": "TEXT",
+        "name": "email",
+        "displayName": "Email",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "phone",
+        "displayName": "Phone",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "gender",
+        "displayName": "Gender",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "dateOfBirth",
+        "displayName": "Date of birth",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "firstName",
+        "displayName": "First name",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "lastName",
+        "displayName": "Last name",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "city",
+        "displayName": "City",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "state",
+        "displayName": "State",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "zip",
+        "displayName": "Zip",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "country",
+        "displayName": "Country",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "externalId",
+        "displayName": "External ID",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "subscriptionId",
+        "displayName": "Subscription ID",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "facebookLoginId",
+        "displayName": "Facebook login ID",
+        "simpleValueType": true
+      }
+    ],
+    "help": "These user data parameters are used to associate your users with a facebook account, as well as helping to associate your event conversions with a similar audience.  None of these parameters are required, for more explaination visit: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#user-data\n\nAll the following information is automatically hashed."
   },
   {
     "type": "CHECKBOX",
@@ -811,48 +915,38 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
+/*eslint-disable no-shadow */
 //permissions and Required Components
 const log = require("logToConsole");
 const sendPixel = require("sendPixel");
 const JSON = require("JSON");
 const getTimestamp = require("getTimestampMillis");
 const encodeUriComponent = require("encodeUriComponent");
-const encodeUri = require("encodeUri");
 const getUrl = require("getUrl");
-const queryPermission = require("queryPermission");
-const setCookie = require("setCookie");
-const callInWindow = require("callInWindow");
 var copyFromWindow = require("copyFromWindow");
-const copyFromDataLayer = require("copyFromDataLayer");
 var setInWindow = require("setInWindow");
-const createQueue = require("createQueue");
 const injectScript = require("injectScript");
 const Math = require("Math");
-const getCookieValues = require('getCookieValues');
+const getCookieValues = require("getCookieValues");
+const sha256 = require("sha256");
 
 
 function sendPixelData(){
-//timestamp generation
+  //timestamp generation
   const evtime = Math.round(getTimestamp() / 1000);
-  log(evtime);
 
   //get customer information parameters
+  if (getCookieValues("_fbc").length > 0) {
+    var fbcid = getCookieValues("_fbc", false)[0];
+  }
 
-if (getCookieValues('_fbc').length > 0) {
-  var fbcid = getCookieValues('_fbc', false)[0];
-} 
+  if (getCookieValues("_fbp").length > 0) {
+    var fbpid = getCookieValues("_fbp", false)[0];
+  }
 
-if (getCookieValues('_fbp').length > 0) {
-  var fbpid = getCookieValues('_fbp', false)[0];
-} 
+  //get datalayer window values
+  const gtmData = copyFromWindow("gtmData");
 
-  
-  // get datalayer window values
-  
-    const gtmData = copyFromWindow("gtmData");
-  log("GTM Data:", gtmData);
-  
-  
   //get all fields from Tag Template
   const lickey = data.apiAccessToken;
   const licemail = data.LicensedEmail;
@@ -860,51 +954,110 @@ if (getCookieValues('_fbp').length > 0) {
   const testevlabel = data.TestEventLabel;
   const pixelId = data.pixelId;
 
-  const objprop = JSON.stringify([
-    {"event_name": data.StandardEvents,
-      "event_time": evtime,
-      "event_id": data.DeduplicationEventID,
-      "event_source_url": getUrl(), "action_source": "website",
-      "user_data": {"client_user_agent": gtmData.ua, "client_ip_address": gtmData.ip, "fbc":getCookieValues('_fbc', false)[0], "fbp":getCookieValues('_fbc', false)[0]},
-      "custom_data": {"content_category": data.content_category,
-        "content_ids": data.content_ids,
-        "content_name": data.content_name,
-        "content_type": data.content_type,
-        "contents": data.contents,
-        "currency": data.currency,
-        "num_items": data.num_items,
-        "predicted_ltv": data.predicted_ltv,
-        "search_string": data.search_string,
-        "status": data.status,
-        "value": data.value},
-      "opt_out": false},
-  ]);
+  const fields = {};
 
+  function finish(){
+    const objprop = JSON.stringify([
+      {
+        "event_name": data.StandardEvents,
+        "event_time": evtime,
+        "action_source": "website",
+        "event_id": data.DeduplicationEventID || null,
+        "event_source_url": getUrl() || null,
+        "user_data": {
+          "em": fields.email,
+          "ph": fields.phone,
+          "ct": fields.city,
+          "client_ip_address": gtmData.ip,
+          "client_user_agent": gtmData.ua,
+          "db": fields.dateOfBirth,
+          "country": fields.country,
+          "fb_login_id": data.fbLoginId || null,
+          "fbp": getCookieValues("_fbc", false)[0] || null,
+          "external_id": fields.externalId,
+          "fbc": getCookieValues("_fbc", false)[0] || null,
+          "fn": fields.firstName,
+          "ln": fields.lastName,
+          "ge": fields.gender,
+          "st": fields.state,
+          "subscription_id": data.subscriptionId || null,
+          "zp": fields.zip,
+        },
+        "custom_data": {
+          "content_category": data.content_category || null,
+          "content_ids": data.content_ids || null,
+          "content_name": data.content_name || null,
+          "content_type": data.content_type || null,
+          "contents": data.contents || null,
+          "currency": data.currency || null,
+          "delivery_category": data.delivery_category || null,
+          "num_items": data.num_items || null,
+          "order_id": data.order_id || null,
+          "predicted_ltv": data.predicted_ltv || null,
+          "search_string": data.search_string || null,
+          "status": data.status || null,
+          "value": data.value || null,
+        },
+        "opt_out": false,
+      },
+    ]);
 
-  //send Get Request to Deviate Tracking API
-  //eslint-disable-next-line prefer-template
-  const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate?" +
-        "license_key=" + encodeUriComponent(lickey) +
-        "&email=" + encodeUriComponent(licemail) +
-        "&fbaccess_tkn=" + encodeUriComponent(fbtkn) +
-        "&additional_data=" + encodeUriComponent(objprop) +
-        "&product_id=DeviateToolsCapi_Prod" +
-        "&fbpixel_id=" + encodeUriComponent(pixelId) +
-        "&test_event_code=" + testevlabel;
+    //send Get Request to Deviate Tracking API
+    //eslint-disable-next-line prefer-template
+    const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate?" +
+          "license_key=" + encodeUriComponent(lickey) +
+          "&email=" + encodeUriComponent(licemail) +
+          "&fbaccess_tkn=" + encodeUriComponent(fbtkn) +
+          "&additional_data=" + encodeUriComponent(objprop) +
+          "&product_id=DeviateToolsCapi_Prod" +
+          "&fbpixel_id=" + encodeUriComponent(pixelId) +
+          "&test_event_code=" + testevlabel;
+    sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
 
-  sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
+    data.gtmOnSuccess();
+  }
 
+  let nCallbacksRemaining = 0;
+  function callback(){
+    nCallbacksRemaining += - 1; //gtm doesn't like -= for some reason
+    if (nCallbacksRemaining <= 0){
+      finish();
+    }
+  }
 
-  data.gtmOnSuccess();
+  function registerSha(key){
+    if (data[key]){
+      nCallbacksRemaining += 1;
+      sha256(data[key], (digest) => {
+        fields[key] = digest;
+        callback();
+      }, (err) => {
+        callback();
+      }, {outputEncoding: "hex"});
+    } else {
+      fields[key] = null;
+    }
+  }
+
+  registerSha("email");
+  registerSha("phone");
+  registerSha("gender");
+  registerSha("dateOfBirth");
+  registerSha("lastName");
+  registerSha("firstName");
+  registerSha("city");
+  registerSha("state");
+  registerSha("zip");
+  registerSha("country");
+  registerSha("externalId");
 }
 
 setInWindow("gtmFunction", sendPixelData, true);
 
-
-
 function onSuccess(){}
 function onFailure(){}
 injectScript("https://deviatetracking.com/getuseragent.js", onSuccess, onFailure);
+log("Deviate Tracking active.");
 
 
 ___WEB_PERMISSIONS___
@@ -1119,122 +1272,6 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
-        "publicId": "set_cookies",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "allowedCookies",
-          "value": {
-            "type": 2,
-            "listItem": [
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_fbc"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_fbp"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
         "publicId": "inject_script",
         "versionId": "1"
       },
@@ -1247,36 +1284,6 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://deviatetracking.com/getuseragent.js"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "read_data_layer",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "keyPatterns",
-          "value": {
-            "type": 2,
-            "listItem": [
-              {
-                "type": 1,
-                "string": "gtm.UA"
-              },
-              {
-                "type": 1,
-                "string": "UA"
               }
             ]
           }
