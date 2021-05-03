@@ -1,9 +1,9 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
-  -sha: dacc8cf4180fced66bd702fe688fbaaa9740c7c4
+  - sha: dacc8cf4180fced66bd702fe688fbaaa9740c7c4
     changeNotes: v3.1.0
-  -sha: 43c2dfba046ae3426e6a64d4e91b42109c49ea2a
+  - sha: 43c2dfba046ae3426e6a64d4e91b42109c49ea2a
     changeNotes: fixed 307 errors
   - sha: 68b52ad5913e34d2755aac287d87b2d37425a81a
     changeNotes: Update icon
