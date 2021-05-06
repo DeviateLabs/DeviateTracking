@@ -2,6 +2,8 @@ homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
   - sha: 3613fc86dc717873bce31427f1d1bcd5d6737018
+    changeNotes: v3.4.1
+  - sha: 61ee503c43932d960b81b255cb4ae6da7c32baf5
     changeNotes: v3.4.0. Fix bug where no events were fired if the user data was left empty.
   - sha: 92ec7a0245ec2ef1b10403a400578f4448a7c514
     changeNotes: v3.3
