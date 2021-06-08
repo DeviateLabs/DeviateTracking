@@ -1,3 +1,8 @@
+
+function log(text){
+  console.log(text);
+}
+
 async function sha256(message) {
   //encode as UTF-8
   const msgBuffer = new TextEncoder().encode(message);
@@ -166,6 +171,7 @@ async function fireDeviateTracking(data){
           "&fbpixel_id=" + encodeURIComponent(data.pixelId) +
           "&test_event_code=" + data.TestEventLabel;
       if (data.sendServerEvent){
+        log("Sending server event");
         fetch(url)
           .then(() => {
             data.gtmOnSuccess();
@@ -176,6 +182,7 @@ async function fireDeviateTracking(data){
       }
 
       if (data.sendBrowserEvent){
+        log("Sending browser event");
         let objectData = extractFbqProps(data, fields, gtmData);
         fbq("track", data.StandardEvents, objectData);
       }
@@ -191,4 +198,5 @@ if (typeof exports !== "undefined") {
   };
 } else {
   window.fireDeviateTracking = fireDeviateTracking;
+  log("Deviate Tracking 4.0 active");
 }

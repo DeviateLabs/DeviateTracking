@@ -16,10 +16,7 @@ const getCookieValues = require("getCookieValues");
 const sha256 = require("sha256");
 
 
-log(data);
 injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking4.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
-  log("Deviate Tracking 4.0 fired.");
-
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   data.fbc = getCookieValues("_fbc") || null;
   fireDeviateTracking(data);
