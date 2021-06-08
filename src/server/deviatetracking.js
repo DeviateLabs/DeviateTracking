@@ -1,6 +1,13 @@
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 
 function log(text){
-  console.log(text);
+  //console.log(text);
 }
 
 async function sha256(message) {
@@ -71,24 +78,24 @@ function createCapiObject(data, fields, gtmData) {
 
 function extractFbqProps(data, fields, gtmData){
   let propMap = {
-    "AddPaymentInfo": ["content_name", "DeduplicationEventID", "content_category", "content_ids", "contents", "currency", "value", "order_id", "delivery_category"],
-    "AddToCart": ["DeduplicationEventID", "content_ids", "content_name", "content_type", "contents", "currency", "value", "order_id", "delivery_category"],
-    "AddToWishlist": ["DeduplicationEventID", "content_category", "content_ids", "content_name", "contents", "currency", "value", "order_id", "delivery_category"],
-    "CompleteRegistration": ["DeduplicationEventID", "content_name", "currency", "status", "value", "order_id", "delivery_category"],
-    "Contact": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "CustomizeProduct": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "Donate": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "FindLocation": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "InitiateCheckout": ["DeduplicationEventID", "content_category", "content_ids", "content_name", "contents", "currency", "num_items", "value", "order_id", "delivery_category"],
-    "Lead": ["DeduplicationEventID", "content_category", "content_name", "currency", "value", "order_id", "delivery_category"],
-    "PageView": ["content_name", "DeduplicationEventID", "delivery_category", "order_id"],
-    "Purchase": ["DeduplicationEventID", "content_ids", "content_name", "content_type", "contents", "currency", "num_items", "value", "order_id", "delivery_category"],
-    "Schedule": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "Search": ["DeduplicationEventID", "content_category", "content_ids", "content_name", "contents", "search_string", "value", "order_id", "delivery_category", "currency"],
-    "StartTrial": ["DeduplicationEventID", "content_name", "currency", "predicted_ltv", "value", "order_id", "delivery_category"],
-    "SubmitApplication": ["DeduplicationEventID", "content_name", "order_id", "delivery_category"],
-    "Subscribe": ["DeduplicationEventID", "content_name", "currency", "predicted_ltv", "value", "order_id", "delivery_category"],
-    "ViewContent": ["DeduplicationEventID", "content_category", "currency", "content_ids", "content_name", "content_type", "contents", "value", "order_id", "delivery_category"],
+    "AddPaymentInfo": ["content_name", "event_id", "content_category", "content_ids", "contents", "currency", "value", "order_id", "delivery_category"],
+    "AddToCart": ["event_id", "content_ids", "content_name", "content_type", "contents", "currency", "value", "order_id", "delivery_category"],
+    "AddToWishlist": ["event_id", "content_category", "content_ids", "content_name", "contents", "currency", "value", "order_id", "delivery_category"],
+    "CompleteRegistration": ["event_id", "content_name", "currency", "status", "value", "order_id", "delivery_category"],
+    "Contact": ["event_id", "content_name", "order_id", "delivery_category"],
+    "CustomizeProduct": ["event_id", "content_name", "order_id", "delivery_category"],
+    "Donate": ["event_id", "content_name", "order_id", "delivery_category"],
+    "FindLocation": ["event_id", "content_name", "order_id", "delivery_category"],
+    "InitiateCheckout": ["event_id", "content_category", "content_ids", "content_name", "contents", "currency", "num_items", "value", "order_id", "delivery_category"],
+    "Lead": ["event_id", "content_category", "content_name", "currency", "value", "order_id", "delivery_category"],
+    "PageView": ["content_name", "event_id", "delivery_category", "order_id"],
+    "Purchase": ["event_id", "content_ids", "content_name", "content_type", "contents", "currency", "num_items", "value", "order_id", "delivery_category"],
+    "Schedule": ["event_id", "content_name", "order_id", "delivery_category"],
+    "Search": ["event_id", "content_category", "content_ids", "content_name", "contents", "search_string", "value", "order_id", "delivery_category", "currency"],
+    "StartTrial": ["event_id", "content_name", "currency", "predicted_ltv", "value", "order_id", "delivery_category"],
+    "SubmitApplication": ["event_id", "content_name", "order_id", "delivery_category"],
+    "Subscribe": ["event_id", "content_name", "currency", "predicted_ltv", "value", "order_id", "delivery_category"],
+    "ViewContent": ["event_id", "content_category", "currency", "content_ids", "content_name", "content_type", "contents", "value", "order_id", "delivery_category"],
   };
 
   let objectData = {};
@@ -105,6 +112,7 @@ function extractFbqProps(data, fields, gtmData){
   objectData = {
     ...objectData,
     ...createUserDataObject(data, fields, gtmData),
+    event_id: data.DeduplicationEventID,
   };
   return objectData;
 }
@@ -118,6 +126,11 @@ async function fireDeviateTracking(data){
     .then((ipData) => {
       return {ua: window.navigator.userAgent, ip: ipData.ip};
     });
+
+  //generate an event id if user didn't give one
+  if (!data.DeduplicationEventID){
+    data.DeduplicationEventID = uuidv4();
+  }
 
   const fields = {};
 

@@ -25,7 +25,7 @@ describe(`${event}`, () => {
     await tmp.fireDeviateTracking({...global.data});
 
     expect(global.fbq).toHaveBeenCalledWith("track", event, expect.objectContaining({
-      "DeduplicationEventID": expect.anything(),
+      "event_id": expect.anything(),
       "content_ids": null,
       "content_name": null,
       "content_type": null,

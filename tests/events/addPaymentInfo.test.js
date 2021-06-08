@@ -25,7 +25,7 @@ describe(`${event}`, () => {
 
     expect(global.fbq).toHaveBeenCalledWith("track", event, expect.objectContaining({
       "content_name": null,
-      "DeduplicationEventID": expect.anything(),
+      "event_id": expect.anything(),
       "content_category": null,
       "content_ids": null,
       "contents": null,
