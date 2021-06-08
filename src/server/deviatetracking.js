@@ -7,7 +7,7 @@ function uuidv4() {
 
 
 function log(text){
-  //console.log(text);
+  console.log(text);
 }
 
 async function sha256(message) {
