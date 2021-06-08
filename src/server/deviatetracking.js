@@ -117,6 +117,44 @@ function extractFbqProps(data, fields, gtmData){
   return objectData;
 }
 
+function injectBasePixelCode(data){
+  if (typeof fbq !== "function"){
+    log("Pixel not defined - defining");
+    //f=window
+    //b=document
+    //e=script url
+    //v="script"
+    !function(f, b, e, v, n, t, s) {
+      if (f.fbq) {
+        return;
+      }
+      n = f.fbq = function(){
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq){
+        f._fbq = n;
+      }
+
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+    fbq("init", data.pixelId);
+    fbq("track", "PageView");
+  } else {
+    log("Pixel already defined");
+  }
+}
+
+
+
 async function fireDeviateTracking(data){
   //get ip
   let gtmData = await fetch("https://api.ipify.org/?format=json")
@@ -126,6 +164,9 @@ async function fireDeviateTracking(data){
     .then((ipData) => {
       return {ua: window.navigator.userAgent, ip: ipData.ip};
     });
+
+  //will only actually do it if hasn't been done already
+  injectBasePixelCode(data);
 
   //generate an event id if user didn't give one
   if (!data.DeduplicationEventID){
