@@ -805,19 +805,21 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [
           {
-            "value": "in_store",
-            "displayValue": "Store"
-          },
-          {
             "value": "curbside",
             "displayValue": "Curbside"
           },
           {
             "value": "home_delivery",
             "displayValue": "Home Delivery"
+          },
+          {
+            "value": "in_store",
+            "displayValue": "Store"
           }
         ],
-        "simpleValueType": true
+        "simpleValueType": true,
+        "notSetText": "None",
+        "defaultValue": ""
       }
     ],
     "help": "These are extra parameters you can send along with your event, some of which are required by standard events."
