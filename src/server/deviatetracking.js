@@ -7,7 +7,7 @@ function uuidv4() {
 
 
 function log(text){
-  console.log(text);
+  //console.log(text);
 }
 
 async function sha256(message) {
@@ -153,9 +153,42 @@ function injectBasePixelCode(data){
   }
 }
 
-
+async function validateKey(data){
+  return new Promise((resolve, reject) => {
+    let query = "?";
+    query += "wc-api=software-api";
+    query += "&request=check";
+    query += "&product_id=DeviateToolsCapi_Prod";
+    query += `&email=${data.LicensedEmail}`;
+    query += `&license_key=${data.apiAccessToken}`;
+    let url = `https://deviatetracking.com/${query}`;
+    fetch(url)
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (res?.success){
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
 
 async function fireDeviateTracking(data){
+  //first layer of validation
+  //if not valid, no need to waste cpu on the rest of this function
+  //key will be validated a second time when the capi request is submitted to prevent xss
+  if (! (await validateKey(data))){
+    console.log("Invalid DeviateTracking key");
+    data.gtmOnFailure("Invalid DeviateTracking key");
+    return;
+  }
+
   //get ip
   let gtmData = await fetch("https://api.ipify.org/?format=json")
     .then((response) => {
@@ -245,10 +278,10 @@ async function fireDeviateTracking(data){
     });
 }
 
-
 if (typeof exports !== "undefined") {
   module.exports = {
     fireDeviateTracking,
+    validateKey,
   };
 } else {
   window.fireDeviateTracking = fireDeviateTracking;
