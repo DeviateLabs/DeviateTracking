@@ -1,19 +1,11 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Facebook Conversions API (CAPI) by Deviate Tracking",
+  "displayName": "Facebook Conversions API (CAPI) by Deviate Tracking (v4.0.0)",
   "categories": [
     "CONVERSIONS",
     "ADVERTISING",
@@ -970,20 +962,14 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 /*eslint-disable no-shadow */
 //permissions and Required Components
 const log = require("logToConsole");
-const sendPixel = require("sendPixel");
-const JSON = require("JSON");
 const getTimestamp = require("getTimestampMillis");
-const encodeUriComponent = require("encodeUriComponent");
-const getUrl = require("getUrl");
 var copyFromWindow = require("copyFromWindow");
-var setInWindow = require("setInWindow");
 const injectScript = require("injectScript");
 const Math = require("Math");
 const getCookieValues = require("getCookieValues");
-const sha256 = require("sha256");
 
 
-injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking4.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
+injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking4.0.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   data.fbc = getCookieValues("_fbc") || null;
   fireDeviateTracking(data);
@@ -1009,55 +995,6 @@ ___WEB_PERMISSIONS___
           "value": {
             "type": 1,
             "string": "all"
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "send_pixel",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "allowedUrls",
-          "value": {
-            "type": 1,
-            "string": "any"
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "get_url",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "urlParts",
-          "value": {
-            "type": 1,
-            "string": "any"
-          }
-        },
-        {
-          "key": "queriesAllowed",
-          "value": {
-            "type": 1,
-            "string": "any"
           }
         }
       ]
@@ -1298,7 +1235,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://deviatetracking.com/wp-content/deviatetracking/deviatetracking4.0.js*"
+                "string": "https://deviatetracking.com/wp-content/deviatetracking/*"
               }
             ]
           }
