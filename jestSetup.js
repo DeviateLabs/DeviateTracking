@@ -16,7 +16,12 @@ beforeEach(() => {
   }));
 
   global.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve({ ip: "192.192.192.192" }),
+    json: () => {
+      return {
+        ip: "192.192.192.192",
+        success: true,
+      };
+    },
   }));
 
   global.fbq = jest.fn(() => {});
