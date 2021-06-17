@@ -138,7 +138,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "value": "PageView",
-        "displayValue": "PageView"
+        "displayValue": "PageView (Facebook Pixel)"
       },
       {
         "value": "Purchase",
@@ -188,9 +188,16 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "ObjectProperties",
-    "displayName": "Object Property",
+    "displayName": "Object Properties",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "ManualEventID",
+        "checkboxText": "Manual EventID?",
+        "simpleValueType": true,
+        "defaultValue": false
+      },
       {
         "type": "SELECT",
         "name": "DeduplicationEventID",
@@ -199,7 +206,15 @@ ___TEMPLATE_PARAMETERS___
         "selectItems": [],
         "simpleValueType": true,
         "help": "Providing an event ID, can help reduce the amount of events that are duplicated when using in conjunction with regular JavaScript FBQ events. We recommend setting a random variable and setting this parameter to it to avoid duplicated event data.",
-        "defaultValue": "EventId"
+        "defaultValue": "Automatic",
+        "enablingConditions": [
+          {
+            "paramName": "ManualEventID",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ],
+        "notSetText": "Automatic"
       },
       {
         "type": "TEXT",
@@ -625,10 +640,25 @@ ___TEMPLATE_PARAMETERS___
             "paramName": "StandardEvents",
             "paramValue": "Purchase",
             "type": "EQUALS"
+          },
+          {
+            "paramName": "StandardEvents",
+            "paramValue": "StartTrial",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "StandardEvents",
+            "paramValue": "Subscribe",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "StandardEvents",
+            "paramValue": "ViewContent",
+            "type": "EQUALS"
           }
         ],
         "notSetText": "This parameter is required for the Purchase Event",
-        "help": "This parameter is required for the Purchase Event, The currency for the value specified.",
+        "help": "Unit of the value parameter. Required for the Purchase event.",
         "defaultValue": "USD"
       },
       {
@@ -787,12 +817,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "SELECT",
         "name": "delivery_category",
         "displayName": "Delivery category",
-        "macrosInSelect": true,
         "selectItems": [
-          {
-            "value": "in_store",
-            "displayValue": "Store"
-          },
           {
             "value": "curbside",
             "displayValue": "Curbside"
@@ -800,9 +825,15 @@ ___TEMPLATE_PARAMETERS___
           {
             "value": "home_delivery",
             "displayValue": "Home Delivery"
+          },
+          {
+            "value": "in_store",
+            "displayValue": "Store"
           }
         ],
-        "simpleValueType": true
+        "simpleValueType": true,
+        "notSetText": "None",
+        "defaultValue": "None"
       }
     ],
     "help": "These are extra parameters you can send along with your event, some of which are required by standard events."
@@ -924,159 +955,51 @@ ___TEMPLATE_PARAMETERS___
         "type": "NON_EMPTY"
       }
     ]
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "sendServerEvent",
+    "checkboxText": "Send Server Event",
+    "simpleValueType": true,
+    "defaultValue": true,
+    "help": "Send events to Facebook through the Deviate Tracking CAPI server",
+    "alwaysInSummary": true
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "sendBrowserEvent",
+    "checkboxText": "Send Browser Event",
+    "simpleValueType": true,
+    "defaultValue": true,
+    "help": "Send events directly to Facebook from the browser",
+    "alwaysInSummary": true
   }
 ]
 
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
+/*eslint-disable prefer-template */
+/*eslint-disable complexity */
 /*eslint-disable no-shadow */
 //permissions and Required Components
 const log = require("logToConsole");
-const sendPixel = require("sendPixel");
-const JSON = require("JSON");
 const getTimestamp = require("getTimestampMillis");
-const encodeUriComponent = require("encodeUriComponent");
-const getUrl = require("getUrl");
 var copyFromWindow = require("copyFromWindow");
-var setInWindow = require("setInWindow");
 const injectScript = require("injectScript");
 const Math = require("Math");
 const getCookieValues = require("getCookieValues");
-const sha256 = require("sha256");
 
 
-function sendPixelData(){
-  //timestamp generation
-  const evtime = Math.round(getTimestamp() / 1000);
-
-  //get customer information parameters
-  if (getCookieValues("_fbc").length > 0) {
-    var fbcid = getCookieValues("_fbc", false)[0];
-  }
-
-  if (getCookieValues("_fbp").length > 0) {
-    var fbpid = getCookieValues("_fbp", false)[0];
-  }
-
-  //get datalayer window values
-  const gtmData = copyFromWindow("gtmData");
-
-  //get all fields from Tag Template
-  const lickey = data.apiAccessToken;
-  const licemail = data.LicensedEmail;
-  const fbtkn = data.FBToken;
-  const testevlabel = data.TestEventLabel;
-  const pixelId = data.pixelId;
-
-  const fields = {};
-
-  function finish(){
-    const objprop = JSON.stringify([
-      {
-        "event_name": data.StandardEvents,
-        "event_time": evtime,
-        "action_source": "website",
-        "event_id": data.DeduplicationEventID || null,
-        "event_source_url": getUrl() || null,
-        "user_data": {
-          "em": fields.email,
-          "ph": fields.phone,
-          "ct": fields.city,
-          "client_ip_address": gtmData.ip,
-          "client_user_agent": gtmData.ua,
-          "db": fields.dateOfBirth,
-          "country": fields.country,
-          "fb_login_id": data.fbLoginId || null,
-          "fbp": getCookieValues("_fbc", false)[0] || null,
-          "external_id": fields.externalId,
-          "fbc": getCookieValues("_fbc", false)[0] || null,
-          "fn": fields.firstName,
-          "ln": fields.lastName,
-          "ge": fields.gender,
-          "st": fields.state,
-          "subscription_id": data.subscriptionId || null,
-          "zp": fields.zip,
-        },
-        "custom_data": {
-          "content_category": data.content_category || null,
-          "content_ids": data.content_ids || null,
-          "content_name": data.content_name || null,
-          "content_type": data.content_type || null,
-          "contents": data.contents || null,
-          "currency": data.currency || null,
-          "delivery_category": data.delivery_category || null,
-          "num_items": data.num_items || null,
-          "order_id": data.order_id || null,
-          "predicted_ltv": data.predicted_ltv || null,
-          "search_string": data.search_string || null,
-          "status": data.status || null,
-          "value": data.value || null,
-        },
-        "opt_out": false,
-      },
-    ]);
-    log(objprop);
-
-    //send Get Request to Deviate Tracking API
-    //eslint-disable-next-line prefer-template
-    const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate?" +
-          "license_key=" + encodeUriComponent(lickey) +
-          "&email=" + encodeUriComponent(licemail) +
-          "&fbaccess_tkn=" + encodeUriComponent(fbtkn) +
-          "&additional_data=" + encodeUriComponent(objprop) +
-          "&product_id=DeviateToolsCapi_Prod" +
-          "&fbpixel_id=" + encodeUriComponent(pixelId) +
-          "&test_event_code=" + testevlabel;
-    sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
-
-    data.gtmOnSuccess();
-  }
-
-  let nCallbacksRemaining = 1;
-  function callback(){
-    nCallbacksRemaining += - 1; //gtm doesn't like -= for some reason
-    if (nCallbacksRemaining <= 0){
-      finish();
-    }
-  }
-
-  function registerSha(key){
-    if (data[key]){
-      nCallbacksRemaining += 1;
-      sha256(data[key], (digest) => {
-        fields[key] = digest;
-        callback();
-      }, (err) => {
-        callback();
-      }, {outputEncoding: "hex"});
-    } else {
-      fields[key] = null;
-    }
-  }
-
-  registerSha("email");
-  registerSha("phone");
-  registerSha("gender");
-  registerSha("dateOfBirth");
-  registerSha("lastName");
-  registerSha("firstName");
-  registerSha("city");
-  registerSha("state");
-  registerSha("zip");
-  registerSha("country");
-  registerSha("externalId");
-
-  callback();
-}
-
-setInWindow("gtmFunction", sendPixelData, true);
-
-function onSuccess(){}
-function onFailure(){}
-injectScript("https://deviatetracking.com/getuseragent.js", onSuccess, onFailure);
-log("Deviate Tracking active.");
-
+injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking4.0.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
+  const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
+  data.fbc = getCookieValues("_fbc") || null;
+  fireDeviateTracking(data);
+}, (e) => {
+  log("ERROR");
+  log(e);
+  data.gtmOnFailure();
+});
 
 
 ___WEB_PERMISSIONS___
@@ -1094,55 +1017,6 @@ ___WEB_PERMISSIONS___
           "value": {
             "type": 1,
             "string": "all"
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "send_pixel",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "allowedUrls",
-          "value": {
-            "type": 1,
-            "string": "any"
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "get_url",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "urlParts",
-          "value": {
-            "type": 1,
-            "string": "any"
-          }
-        },
-        {
-          "key": "queriesAllowed",
-          "value": {
-            "type": 1,
-            "string": "any"
           }
         }
       ]
@@ -1280,6 +1154,84 @@ ___WEB_PERMISSIONS___
                     "boolean": false
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "sendFbq"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "fireDeviateTracking"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -1305,7 +1257,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://deviatetracking.com/getuseragent.js"
+                "string": "https://deviatetracking.com/wp-content/deviatetracking/*"
               }
             ]
           }
@@ -1360,10 +1312,7 @@ ___WEB_PERMISSIONS___
 ___TESTS___
 
 scenarios: []
+setup: ''
 
 
 ___NOTES___
-
-Created on 3/12/2021, 10:42:29 AM
-
-
