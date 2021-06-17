@@ -1,7 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
-
+  -sha; 73eb413b05ae7b6b196f5c1d5f366a77e95ff97b
+  changenotes: version 4.0 Conslidates Serverside and Browser Side events so you dont need to set an EventID
   - sha: 4eab818e0ec76dea189db8c29cb1a019c5982d4a
     changeNotes: updated description to fit in 200 char limit
   - sha: 4af351ea8c3e55126da9f5a9cba15fee8b1d2624
