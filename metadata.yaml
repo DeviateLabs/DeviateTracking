@@ -2,8 +2,6 @@ homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
   - sha: 4eab818e0ec76dea189db8c29cb1a019c5982d4a
-    changeNotes: v3.5
-  - sha: 4eab818e0ec76dea189db8c29cb1a019c5982d4a
     changeNotes: updated description to fit in 200 char limit
   - sha: 4af351ea8c3e55126da9f5a9cba15fee8b1d2624
     changeNotes: updated description
