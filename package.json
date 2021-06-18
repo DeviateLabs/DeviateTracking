@@ -1,0 +1,28 @@
+{
+  "name": "deviatetracking",
+  "version": "1.0.0",
+  "description": "Community Tag Template",
+  "main": "deviatetracking4.0.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest --env=./jest-environment.js --max-workers=32 --no-cache",
+    "watch": "jest --watch --env=./jest-environment.js --max-workers=32 --no-cache",
+    "coverage": "jest --coverage --env=./jest-environment.js --max-workers=32 --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeviateLabs/DeviateTracking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeviateLabs/DeviateTracking/issues"
+  },
+  "homepage": "https://github.com/DeviateLabs/DeviateTracking#readme",
+  "dependencies": {
+    "@peculiar/webcrypto": "^1.1.7",
+    "jest": "^27.0.4"
+  }
+}
