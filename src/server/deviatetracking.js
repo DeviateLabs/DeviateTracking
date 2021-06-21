@@ -25,25 +25,31 @@ async function sha256(message) {
   return hashHex;
 }
 
+//eslint-disable-next-line complexity
 function createUserDataObject(data, fields, gtmData){
+  //this code only adds a key to the object if its value is defined
+  //the way it works is that && only evaluates the second term if the first is true
+  //also && returns the value of the last term
+  //so if !fields.email, the spread operator has nothing to spread
+  //and if fields.email, the spread operator gets an object and copies its properties into the returned object
   return {
-    "em": fields.email,
-    "ph": fields.phone,
-    "ct": fields.city,
-    "client_ip_address": gtmData.ip,
-    "client_user_agent": gtmData.ua,
-    "db": fields.dateOfBirth,
-    "country": fields.country,
-    "fb_login_id": data.fbLoginId || null,
-    "fbp": data.fbc[0] || null,
-    "external_id": fields.externalId,
-    "fbc": data.fbc[0] || null,
-    "fn": fields.firstName,
-    "ln": fields.lastName,
-    "ge": fields.gender,
-    "st": fields.state,
-    "subscription_id": data.subscriptionId || null,
-    "zp": fields.zip,
+    ...fields.email && {"em": fields.email},
+    ...fields.phone && {"ph": fields.phone},
+    ...fields.city && {"ct": fields.city},
+    ...gtmData.ip && {"client_ip_address": gtmData.ip},
+    ...gtmData.ua && {"client_user_agent": gtmData.ua},
+    ...fields.dateOfBirth && {"db": fields.dateOfBirth},
+    ...fields.country && {"country": fields.country},
+    ...data.fbLoginId && {"fb_login_id": data.fbLoginId || null},
+    ...data.fbc[0] && {"fbp": data.fbc[0] || null},
+    ...fields.externalId && {"external_id": fields.externalId},
+    ...data.fbc[0] && {"fbc": data.fbc[0] || null},
+    ...fields.firstName && {"fn": fields.firstName},
+    ...fields.lastName && {"ln": fields.lastName},
+    ...fields.gender && {"ge": fields.gender},
+    ...fields.state && {"st": fields.state},
+    ...data.subscriptionId && {"subscription_id": data.subscriptionId || null},
+    ...fields.zip && {"zp": fields.zip},
   };
 }
 
@@ -209,37 +215,59 @@ async function fireDeviateTracking(data){
 
   let shaPromises = [
     sha256(data.email).then((digest) => {
-      fields.email = digest;
+      if (data.email){
+        fields.email = digest;
+      }
     }),
     sha256(data.phone).then((digest) => {
-      fields.phone = digest;
+      if (data.phone){
+        fields.phone = digest;
+      }
     }),
     sha256(data.gender).then((digest) => {
-      fields.gender = digest;
+      if (data.gender){
+        fields.gender = digest;
+      }
     }),
     sha256(data.dateOfBirth).then((digest) => {
-      fields.dateOfBirth = digest;
+      if (data.dateOfBirth){
+        fields.dateOfBirth = digest;
+      }
     }),
     sha256(data.lastName).then((digest) => {
-      fields.lastName = digest;
+      if (data.lastName){
+        fields.lastName = digest;
+      }
     }),
     sha256(data.firstName).then((digest) => {
-      fields.firstName = digest;
+      if (data.firstName){
+        fields.firstName = digest;
+      }
     }),
     sha256(data.city).then((digest) => {
-      fields.city = digest;
+      if (data.city){
+        fields.city = digest;
+      }
     }),
     sha256(data.state).then((digest) => {
-      fields.state = digest;
+      if (data.state){
+        fields.state = digest;
+      }
     }),
     sha256(data.zip).then((digest) => {
-      fields.zip = digest;
+      if (data.zip){
+        fields.zip = digest;
+      }
     }),
     sha256(data.country).then((digest) => {
-      fields.country = digest;
+      if (data.country){
+        fields.country = digest;
+      }
     }),
     sha256(data.externalId).then((digest) => {
-      fields.externalId = digest;
+      if (data.externalId){
+        fields.externalId = digest;
+      }
     }),
   ];
   await Promise.all(shaPromises)
