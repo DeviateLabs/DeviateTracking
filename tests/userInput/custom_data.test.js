@@ -201,7 +201,7 @@ describe("server event handles valid user input for custom_data", () => {
 });
 
 describe("server event handles no input for custom_data", () => {
-  it("should send content_category with server event", async() => {
+  it("should not send undefined content_category with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -212,7 +212,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_ids with server event", async() => {
+  it("should not send undefined content_ids with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.content_ids;
@@ -224,7 +224,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_name with server event", async() => {
+  it("should not send undefined content_name with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.content_name;
@@ -236,7 +236,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_type with server event", async() => {
+  it("should not send undefined content_type with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -247,7 +247,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send contents with server event", async() => {
+  it("should not send undefined contents with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.contents;
@@ -259,7 +259,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send currency with server event", async() => {
+  it("should not send undefined currency with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -270,7 +270,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send delivery_category with server event", async() => {
+  it("should not send undefined delivery_category with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.delivery_category;
@@ -282,7 +282,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send num_items with server event", async() => {
+  it("should not send undefined num_items with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -293,7 +293,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send order_id with server event", async() => {
+  it("should not send undefined order_id with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -305,7 +305,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send predicted_ltv with server event", async() => {
+  it("should not send undefined predicted_ltv with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -316,7 +316,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send search_string with server event", async() => {
+  it("should not send undefined search_string with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -327,7 +327,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send status with server event", async() => {
+  it("should not send undefined status with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
@@ -338,7 +338,7 @@ describe("server event handles no input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send value with server event", async() => {
+  it("should not send undefined value with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.value;
