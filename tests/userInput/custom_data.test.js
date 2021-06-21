@@ -548,7 +548,7 @@ describe("browser event handles valid user input for custom_data", () => {
 });
 
 describe("browser event handles no user input for custom_data", () => {
-  it("should send content_category", async() => {
+  it("should not send undefined  content_category", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.content_category;
@@ -559,7 +559,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_ids", async() => {
+  it("should not send undefined  content_ids", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.content_ids;
@@ -571,7 +571,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_name", async() => {
+  it("should not send undefined content_name", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.content_name;
@@ -583,7 +583,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_type", async() => {
+  it("should not send undefined  content_type", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddToCart";
     delete data.content_type;
@@ -595,7 +595,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send contents", async() => {
+  it("should not send undefined  contents", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.contents;
@@ -607,7 +607,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send currency", async() => {
+  it("should not send undefined  currency", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.currency;
@@ -619,7 +619,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send delivery_category", async() => {
+  it("should not send undefined  delivery_category", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.delivery_category;
@@ -631,7 +631,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send num_items", async() => {
+  it("should not send undefined  num_items", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "InitiateCheckout";
     delete data.num_items;
@@ -643,7 +643,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send order_id", async() => {
+  it("should not send undefined  order_id", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.order_id;
@@ -655,7 +655,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send predicted_ltv", async() => {
+  it("should not send undefined  predicted_ltv", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "StartTrial";
     delete data.predicted_ltv;
@@ -667,7 +667,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send search_string", async() => {
+  it("should not send undefined  search_string", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "Search";
     delete data.search_string;
@@ -679,7 +679,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send status", async() => {
+  it("should not send undefined  status", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "CompleteRegistration";
     delete data.status;
@@ -691,7 +691,7 @@ describe("browser event handles no user input for custom_data", () => {
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send value", async() => {
+  it("should not send undefined  value", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.value;
