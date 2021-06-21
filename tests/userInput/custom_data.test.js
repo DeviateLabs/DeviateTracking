@@ -207,7 +207,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_category\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_category\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -219,7 +219,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_ids\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_ids\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -231,7 +231,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_name\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_name\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -242,7 +242,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_type\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_type\":ll")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -254,7 +254,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"contents\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"contents\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -265,7 +265,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"currency\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"currency\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -277,7 +277,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"delivery_category\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"delivery_category\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -288,7 +288,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"num_items\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"num_items\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -300,7 +300,7 @@ describe("server event handles no input for custom_data", () => {
     delete data.order_id;
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"order_id\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"order_id\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -311,7 +311,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"predicted_ltv\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"predicted_ltv\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -322,7 +322,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"search_string\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"search_string\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -333,7 +333,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"status\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"status\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -345,7 +345,7 @@ describe("server event handles no input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"value\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"value\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
