@@ -103,8 +103,6 @@ function extractFbqProps(data, fields, gtmData){
     propMap[data.StandardEvents].forEach((key) => {
       if (data[key]){
         objectData[key] = data[key];
-      } else {
-        objectData[key] = null;
       }
     }, {});
   }
@@ -114,6 +112,7 @@ function extractFbqProps(data, fields, gtmData){
     ...createUserDataObject(data, fields, gtmData),
     event_id: data.DeduplicationEventID,
   };
+
   return objectData;
 }
 
