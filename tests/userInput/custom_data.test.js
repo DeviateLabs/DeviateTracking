@@ -201,151 +201,151 @@ describe("server event handles valid user input for custom_data", () => {
 });
 
 describe("server event handles no input for custom_data", () => {
-  it("should send content_category with server event", async() => {
+  it("should not send undefined content_category with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_category\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_category\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_ids with server event", async() => {
+  it("should not send undefined content_ids with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.content_ids;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_ids\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_ids\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_name with server event", async() => {
+  it("should not send undefined content_name with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.content_name;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_name\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_name\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_type with server event", async() => {
+  it("should not send undefined content_type with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"content_type\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"content_type\":ll")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send contents with server event", async() => {
+  it("should not send undefined contents with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.contents;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"contents\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"contents\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send currency with server event", async() => {
+  it("should not send undefined currency with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"currency\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"currency\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send delivery_category with server event", async() => {
+  it("should not send undefined delivery_category with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.delivery_category;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"delivery_category\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"delivery_category\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send num_items with server event", async() => {
+  it("should not send undefined num_items with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"num_items\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"num_items\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send order_id with server event", async() => {
+  it("should not send undefined order_id with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     delete data.order_id;
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"order_id\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"order_id\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send predicted_ltv with server event", async() => {
+  it("should not send undefined predicted_ltv with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"predicted_ltv\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"predicted_ltv\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send search_string with server event", async() => {
+  it("should not send undefined search_string with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"search_string\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"search_string\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send status with server event", async() => {
+  it("should not send undefined status with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"status\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"status\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send value with server event", async() => {
+  it("should not send undefined value with server event", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = event;
     delete data.value;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"value\":null")));
+    expect(global.fetch).toHaveBeenCalledWith(expect.not.stringMatching(encodeURIComponent("\"value\"")));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -548,149 +548,156 @@ describe("browser event handles valid user input for custom_data", () => {
 });
 
 describe("browser event handles no user input for custom_data", () => {
-  it("should send content_category", async() => {
+  it("should not send undefined  content_category", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
+    delete data.content_category;
 
     await tmp.fireDeviateTracking({ ...global.data });
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_category: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_category: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_ids", async() => {
+  it("should not send undefined  content_ids", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.content_ids;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_ids: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_ids: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_name", async() => {
+  it("should not send undefined content_name", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.content_name;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_name: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_name: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send content_type", async() => {
+  it("should not send undefined  content_type", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddToCart";
+    delete data.content_type;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.objectContaining({content_type: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.not.objectContaining({content_type: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send contents", async() => {
+  it("should not send undefined  contents", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.contents;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({contents: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({contents: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send currency", async() => {
+  it("should not send undefined  currency", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
+    delete data.currency;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({currency: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({currency: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send delivery_category", async() => {
+  it("should not send undefined  delivery_category", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.delivery_category;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({delivery_category: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({delivery_category: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send num_items", async() => {
+  it("should not send undefined  num_items", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "InitiateCheckout";
+    delete data.num_items;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.objectContaining({num_items: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.not.objectContaining({num_items: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send order_id", async() => {
+  it("should not send undefined  order_id", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.order_id;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({order_id: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({order_id: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send predicted_ltv", async() => {
+  it("should not send undefined  predicted_ltv", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "StartTrial";
+    delete data.predicted_ltv;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.objectContaining({predicted_ltv: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.not.objectContaining({predicted_ltv: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send search_string", async() => {
+  it("should not send undefined  search_string", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "Search";
+    delete data.search_string;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.objectContaining({search_string: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.not.objectContaining({search_string: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send status", async() => {
+  it("should not send undefined  status", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "CompleteRegistration";
+    delete data.status;
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.objectContaining({status: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.not.objectContaining({status: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
-  it("should send value", async() => {
+  it("should not send undefined  value", async() => {
     data.sendServerEvent = true;
     data.StandardEvents = "AddPaymentInfo";
     delete data.value;
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({value: null}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({value: expect.anything()}));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });

@@ -21,14 +21,17 @@ describe(`${event}`, () => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
     data.StandardEvents = event;
+    data.content_name = "test";
+    data.delivery_category = "test";
+    data.order_id = "test";
 
     await tmp.fireDeviateTracking({...global.data});
 
     expect(global.fbq).toHaveBeenCalledWith("track", event, expect.objectContaining({
-      "content_name": null,
       "event_id": expect.anything(),
-      "delivery_category": null,
-      "order_id": null,
+      "content_name": "test",
+      "delivery_category": "test",
+      "order_id": "test",
     }));
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
