@@ -164,7 +164,7 @@ async function validateKey(data){
     query += "wc-api=software-api";
     query += "&request=check";
     query += "&product_id=DeviateToolsCapi_Prod";
-    query += `&email=${data.LicensedEmail}`;
+    query += `&email=${encodeURIComponent(data.LicensedEmail)}`;
     query += `&license_key=${data.apiAccessToken}`;
     let url = `https://deviatetracking.com/${query}`;
     fetch(url)

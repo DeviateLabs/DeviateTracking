@@ -37,4 +37,21 @@ describe("validateKey", () => {
 
     expect(await tmp.validateKey(global.data)).toBeFalsy();
   });
+
+
+  it("urlencodes the licensedemail arg", async() => {
+    data.apiAccessToken = "invalidkey";
+    data.LicensedEmail = "midnighthaley+1@gmail.com";
+
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => {
+        return {error: "Invalid Request"};
+      },
+    }));
+
+    return tmp.validateKey(global.data)
+      .then(() => {
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("midnighthaley%2B1%40gmail.com"));
+      });
+  });
 });
