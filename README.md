@@ -1,16 +1,14 @@
 # Deviate Tracking
+
 A GTM Community Tag Template.
 
 Please visit https://deviatetracking.com/ for more information.
 
-Deviate Tracking is a Facebook Conversion API (CAPI) solution packaged as a point-and-click Google Tag Manager (GTM) template. It empowers you to track users -- including iOS 14 users -- in Facebook ads. 
+Deviate Tracking is a Facebook Conversion API (CAPI) solution packaged as a point-and-click Google Tag Manager (GTM) template. It empowers you to track users -- including iOS 14 users -- in Facebook ads.
 
 Deviate Tracking works by sending conversion data to the Deviate Tracking server, which then forwards it to Facebook. This bypasses the anti-tracking measures employed by Apple in iOS 14. Deviate Tracking offers the advanced features that marketers want, but is also simple to use, requires no programming knowledge, and imports directly into your GTM.
 
-With Deviate Tracking, you can get all the benefits of server-side conversion data without the nerve-wracking hassle of maintaining a server. Install it today to increase your conversions and lower your ad costs. 
-
-
-*****
+With Deviate Tracking, you can get all the benefits of server-side conversion data without the nerve-wracking hassle of maintaining a server. Install it today to increase your conversions and lower your ad costs.
 
 ## Features
 
@@ -32,7 +30,7 @@ The launch of iOS 14 made it nearly impossible to track Apple users by conventio
 
 ### Cross Platform
 
-Deviate Tracking works on all Javascript-enabled devices, including Apple, Android, Mac, Windows, and Linux. Choose Deviate Tracking and rest easy knowing that *all* your users are being counted in your marketing reports.
+Deviate Tracking works on all Javascript-enabled devices, including Apple, Android, Mac, Windows, and Linux. Choose Deviate Tracking and rest easy knowing that _all_ your users are being counted in your marketing reports.
 
 ### Advanced Tracking Options
 
