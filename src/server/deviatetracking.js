@@ -163,7 +163,7 @@ async function validateKey(data){
     let query = "?";
     query += "wc-api=software-api";
     query += "&request=check";
-    query += "&product_id=DeviateToolsCapi_Prod";
+    query += "&product_id=DeviateToolsCapi_Prod"; //not necessary after the new migration, only here to make the migration easier
     query += `&email=${encodeURIComponent(data.LicensedEmail)}`;
     query += `&license_key=${data.apiAccessToken}`;
     let url = `https://deviatetracking.com/${query}`;
@@ -276,7 +276,7 @@ async function fireDeviateTracking(data){
 
       //send Get Request to Deviate Tracking API
       //eslint-disable-next-line prefer-template
-      const url = "https://wc-service-ert7bqptja-uc.a.run.app/license/validate?" +
+      const url = "https://v1.api.deviatetracking.com/license/validate?" +
           "license_key=" + encodeURIComponent(data.apiAccessToken) +
           "&email=" + encodeURIComponent(data.LicensedEmail) +
           "&fbaccess_tkn=" + encodeURIComponent(data.FBToken) +
