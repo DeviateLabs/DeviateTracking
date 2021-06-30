@@ -24,5 +24,8 @@
   "dependencies": {
     "@peculiar/webcrypto": "^1.1.7",
     "jest": "^27.0.4"
+  },
+  "devDependencies": {
+    "jest-mock-random": "^1.1.1"
   }
 }

@@ -14,7 +14,7 @@ it("should send a server event if key is valid", async() => {
 
   return tmp.fireDeviateTracking(global.data)
     .then(() => {
-      expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("v1.api.deviatetracking.com"));
+      expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("v2.api.deviatetracking.com"));
       expect(data.gtmOnSuccess).toHaveBeenCalled();
       expect(data.gtmOnFailure).not.toHaveBeenCalled();
     });
@@ -34,7 +34,7 @@ it("should not send a server event if the key is invalid", async() => {
 
   return tmp.fireDeviateTracking(global.data)
     .then(() => {
-      expect(global.fetch).not.toHaveBeenCalledWith(expect.stringMatching("v1.api.deviatetracking.com"));
+      expect(global.fetch).not.toHaveBeenCalledWith(expect.stringMatching("v2.api.deviatetracking.com"));
       expect(data.gtmOnSuccess).not.toHaveBeenCalled();
       expect(data.gtmOnFailure).toHaveBeenCalled();
     });

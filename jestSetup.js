@@ -84,7 +84,10 @@ global.eventFields = {
   content_category: [null, "content-category"],
   num_items: [null, "0"],
   predicted_ltv: [null, "24"],
+
 };
+
+
 
 afterEach(() => {
   windowSpy.mockRestore();

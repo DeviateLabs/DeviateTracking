@@ -194,6 +194,14 @@ async function fireDeviateTracking(data){
     return;
   }
 
+  //convert gtm default values to null
+  for (const [key, value] of Object.entries(data)){
+    if ((value === "None") || (value === "Automatic")){
+      data[key] = null;
+    }
+  }
+  //console.log(data.delivery_category);
+
   //get ip
   let gtmData = await fetch("https://api.ipify.org/?format=json")
     .then((response) => {
@@ -205,6 +213,8 @@ async function fireDeviateTracking(data){
 
   //will only actually do it if hasn't been done already
   injectBasePixelCode(data);
+
+
 
   //generate an event id if user didn't give one
   if (!data.DeduplicationEventID){
@@ -276,7 +286,7 @@ async function fireDeviateTracking(data){
 
       //send Get Request to Deviate Tracking API
       //eslint-disable-next-line prefer-template
-      const url = "https://v1.api.deviatetracking.com/license/validate?" +
+      const url = "https://v2.api.deviatetracking.com/license/validate?" +
           "license_key=" + encodeURIComponent(data.apiAccessToken) +
           "&email=" + encodeURIComponent(data.LicensedEmail) +
           "&fbaccess_tkn=" + encodeURIComponent(data.FBToken) +
