@@ -116,7 +116,6 @@ function extractFbqProps(data, fields, gtmData){
   objectData = {
     ...objectData,
     ...createUserDataObject(data, fields, gtmData),
-    event_id: data.DeduplicationEventID,
   };
 
   return objectData;
@@ -189,18 +188,17 @@ async function fireDeviateTracking(data){
   //if not valid, no need to waste cpu on the rest of this function
   //key will be validated a second time when the capi request is submitted to prevent xss
   if (! (await validateKey(data))){
-    console.log("Invalid DeviateTracking key");
+    console.error("Invalid DeviateTracking key");
     data.gtmOnFailure("Invalid DeviateTracking key");
     return;
   }
 
   //convert gtm default values to null
   for (const [key, value] of Object.entries(data)){
-    if ((value === "None") || (value === "Automatic")){
+    if ((value === "None") || (value === "Automatic") || (value === "EventId")){
       data[key] = null;
     }
   }
-  //console.log(data.delivery_category);
 
   //get ip
   let gtmData = await fetch("https://api.ipify.org/?format=json")
@@ -308,7 +306,7 @@ async function fireDeviateTracking(data){
       if (data.sendBrowserEvent){
         log("Sending browser event");
         let objectData = extractFbqProps(data, fields, gtmData);
-        fbq("track", data.StandardEvents, objectData);
+        fbq("track", data.StandardEvents, objectData, {eventID: data.DeduplicationEventID});
       }
 
       data.gtmOnSuccess();

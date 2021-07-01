@@ -372,7 +372,7 @@ describe("browser event handles valid user input for custom_data", () => {
     data.content_category = variable;
 
     await tmp.fireDeviateTracking({ ...global.data });
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_category: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_category: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -387,7 +387,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_ids: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_ids: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -402,7 +402,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_name: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({content_name: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -417,7 +417,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.objectContaining({content_type: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.objectContaining({content_type: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -432,7 +432,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({contents: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({contents: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -447,7 +447,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({currency: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({currency: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -462,7 +462,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({delivery_category: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({delivery_category: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -477,7 +477,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.objectContaining({num_items: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.objectContaining({num_items: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -492,7 +492,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({order_id: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({order_id: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -507,7 +507,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.objectContaining({predicted_ltv: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.objectContaining({predicted_ltv: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -522,7 +522,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.objectContaining({search_string: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.objectContaining({search_string: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -537,7 +537,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.objectContaining({status: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.objectContaining({status: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -552,7 +552,7 @@ describe("browser event handles valid user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({value: variable}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.objectContaining({value: variable}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -565,7 +565,7 @@ describe("browser event handles no user input for custom_data", () => {
     delete data.content_category;
 
     await tmp.fireDeviateTracking({ ...global.data });
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_category: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_category: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -577,7 +577,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_ids: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_ids: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -589,7 +589,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_name: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({content_name: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -601,7 +601,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.not.objectContaining({content_type: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddToCart", expect.not.objectContaining({content_type: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -613,7 +613,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({contents: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({contents: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -625,7 +625,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({currency: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({currency: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -637,7 +637,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({delivery_category: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({delivery_category: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -649,7 +649,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({delivery_category: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({delivery_category: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -661,7 +661,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.not.objectContaining({num_items: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "InitiateCheckout", expect.not.objectContaining({num_items: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -673,7 +673,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({order_id: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({order_id: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -685,7 +685,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.not.objectContaining({predicted_ltv: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "StartTrial", expect.not.objectContaining({predicted_ltv: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -697,7 +697,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.not.objectContaining({search_string: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "Search", expect.not.objectContaining({search_string: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -709,7 +709,7 @@ describe("browser event handles no user input for custom_data", () => {
 
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.not.objectContaining({status: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "CompleteRegistration", expect.not.objectContaining({status: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -720,7 +720,7 @@ describe("browser event handles no user input for custom_data", () => {
     delete data.value;
     await tmp.fireDeviateTracking({ ...global.data });
 
-    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({value: expect.anything()}));
+    expect(global.fbq).toHaveBeenCalledWith("track", "AddPaymentInfo", expect.not.objectContaining({value: expect.anything()}), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });

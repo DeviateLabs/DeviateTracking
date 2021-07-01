@@ -12,7 +12,7 @@ describe(`${event}`, () => {
     await tmp.fireDeviateTracking({...global.data});
 
     expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent(`"event_name":"${event}"`)));
-    expect(global.fbq).toHaveBeenCalledWith("track", event, expect.anything());
+    expect(global.fbq).toHaveBeenCalledWith("track", event, expect.anything(), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
@@ -35,7 +35,6 @@ describe(`${event}`, () => {
     await tmp.fireDeviateTracking({...global.data});
 
     expect(global.fbq).toHaveBeenCalledWith("track", event, expect.objectContaining({
-      "event_id": expect.anything(),
       "content_category": "test",
       "currency": "test",
       "content_ids": "test",
@@ -45,7 +44,7 @@ describe(`${event}`, () => {
       "value": "test",
       "order_id": "test",
       "delivery_category": "test",
-    }));
+    }), expect.anything());
     expect(data.gtmOnSuccess).toHaveBeenCalled();
     expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
