@@ -7,29 +7,27 @@ describe(`${event}`, () => {
   it("should send the correct event type", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    data.StandardEvents = event;
+    data.eventName = event;
 
     await tmp.fireDeviateTracking({...global.data});
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent(`"event_name":"${event}"`)));
+    expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(`"eventName":"${event}"`));
     expect(global.fbq).toHaveBeenCalledWith("track", event, expect.anything(), expect.anything());
-    expect(data.gtmOnSuccess).toHaveBeenCalled();
-    expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 
   it("browser event sends all the required fields", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    data.StandardEvents = event;
-    data.content_ids = "test";
-    data.content_name = "test";
-    data.content_type = "test";
+    data.eventName = event;
+    data.contentIds = "test";
+    data.contentName = "test";
+    data.contentType = "test";
     data.contents = "test";
     data.currency = "test";
-    data.num_items = "test";
+    data.numItems = "test";
     data.value = "test";
-    data.order_id = "test";
-    data.delivery_category = "test";
+    data.orderId = "test";
+    data.deliveryCategory = "test";
 
     await tmp.fireDeviateTracking({...global.data});
 
@@ -44,7 +42,5 @@ describe(`${event}`, () => {
       "order_id": "test",
       "delivery_category": "test",
     }), expect.anything());
-    expect(data.gtmOnSuccess).toHaveBeenCalled();
-    expect(data.gtmOnFailure).not.toHaveBeenCalled();
   });
 });

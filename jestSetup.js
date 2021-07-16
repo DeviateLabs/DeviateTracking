@@ -31,21 +31,16 @@ beforeEach(() => {
     .mockImplementation(() => new Date("2019-05-14T11:01:58.135Z").valueOf());
 
   global.data = {
-    "DeduplicationEventID": "EventId",
-    "FBToken": "fakefbtoken",
-    "LicensedEmail": "deviatetracking@gmail.com",
-    "StandardEvents": "Search",
-    "TestEventLabel": "RavenTestEvent",
-    "TestEventStatus": true,
-    "apiAccessToken": "fakeapitoken",
+    "eventId": "EventId",
+    "fbToken": "fakefbtoken",
+    "dtEmail": "deviatetracking@gmail.com",
+    "eventName": "Search",
+    "testCode": "RavenTestEvent",
+    "dtKey": "fakeapitoken",
     "fbc": [],
-    "gtmEventId": 9,
-    "gtmTagId": 57,
     "pixelId": "fakepixelid",
     "sendBrowserEvent": true,
     "sendServerEvent": true,
-    gtmOnSuccess: jest.fn(() => {}),
-    gtmOnFailure: jest.fn(() => {}),
   };
 });
 

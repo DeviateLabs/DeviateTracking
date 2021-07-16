@@ -5,11 +5,6 @@ function uuidv4() {
   });
 }
 
-
-function log(text){
-  //console.log(text);
-}
-
 async function sha256(message) {
   //encode as UTF-8
   const msgBuffer = new TextEncoder().encode(message);
@@ -26,63 +21,49 @@ async function sha256(message) {
 }
 
 //eslint-disable-next-line complexity
-function createUserDataObject(data, fields, gtmData){
+function createUserDataObject(data){
   //this code only adds a key to the object if its value is defined
   //the way it works is that && only evaluates the second term if the first is true
   //also && returns the value of the last term
   //so if !fields.email, the spread operator has nothing to spread
   //and if fields.email, the spread operator gets an object and copies its properties into the returned object
   return {
-    ...fields.email && {"em": fields.email},
-    ...fields.phone && {"ph": fields.phone},
-    ...fields.city && {"ct": fields.city},
-    ...gtmData.ip && {"client_ip_address": gtmData.ip},
-    ...gtmData.ua && {"client_user_agent": gtmData.ua},
-    ...fields.dateOfBirth && {"db": fields.dateOfBirth},
-    ...fields.country && {"country": fields.country},
-    ...data.fbLoginId && {"fb_login_id": data.fbLoginId || null},
-    ...data.fbc[0] && {"fbp": data.fbc[0] || null},
-    ...fields.externalId && {"external_id": fields.externalId},
-    ...data.fbc[0] && {"fbc": data.fbc[0] || null},
-    ...fields.firstName && {"fn": fields.firstName},
-    ...fields.lastName && {"ln": fields.lastName},
-    ...fields.gender && {"ge": fields.gender},
-    ...fields.state && {"st": fields.state},
-    ...data.subscriptionId && {"subscription_id": data.subscriptionId || null},
-    ...fields.zip && {"zp": fields.zip},
+    ...data?.userData?.email && {"em": data.userData.email},
+    ...data?.userData?.phone && {"ph": data.userData.phone},
+    ...data?.userData?.city && {"ct": data.userData.city},
+    ...data?.userData?.userAgent && {"client_user_agent": data.userData.userAgent},
+    ...data?.userData?.dateOfBirth && {"db": data.userData.dateOfBirth},
+    ...data?.userData?.country && {"country": data.userData.country},
+    ...data?.userData?.fbLoginId && {"fb_login_id": data.userData.fbLoginId || null},
+    ...data?.userData?.fbc && {"fbp": data.userData.fbc[0] || null},
+    ...data?.userData?.externalId && {"external_id": data.userData.externalId},
+    ...data?.userData?.fbc && {"fbc": data.userData.fbc[0] || null},
+    ...data?.userData?.firstName && {"fn": data.userData.firstName},
+    ...data?.userData?.lastName && {"ln": data.userData.lastName},
+    ...data?.userData?.gender && {"ge": data.userData.gender},
+    ...data?.userData?.state && {"st": data.userData.state},
+    ...data?.userData?.subscriptionId && {"subscription_id": data.userData.subscriptionId || null},
+    ...data?.userData?.zip && {"zp": data.userData.zip},
   };
 }
 
-function createCapiObject(data, fields, gtmData) {
-  return JSON.stringify([
-    {
-      "event_name": data.StandardEvents,
-      "event_time": Math.round(Date.now() / 1000),
-      "action_source": "website",
-      "event_id": data.DeduplicationEventID || null,
-      "event_source_url": window.location.href,
-      "user_data": createUserDataObject(data, fields, gtmData),
-      "custom_data": {
-        ...data.content_category && {"content_category": data.content_category},
-        ...data.content_ids && {"content_ids": data.content_ids},
-        ...data.content_name && {"content_name": data.content_name},
-        ...data.content_type && {"content_type": data.content_type},
-        ...data.contents && {"contents": data.contents},
-        ...data.currency && {"currency": data.currency},
-        ...data.delivery_category && {"delivery_category": data.delivery_category},
-        ...data.num_items && {"num_items": data.num_items},
-        ...data.order_id && {"order_id": data.order_id},
-        ...data.predicted_ltv && {"predicted_ltv": data.predicted_ltv},
-        ...data.search_string && {"search_string": data.search_string},
-        ...data.status && {"status": data.status},
-        ...data.value && {"value": data.value},
-      },
-      "opt_out": false,
-    },
-  ]);
-}
-
-function extractFbqProps(data, fields, gtmData){
+function extractFbqProps(data){
+  let nameMap = {
+    "content_category": "contentCategory",
+    "content_ids": "contentIds",
+    "content_name": "contentName",
+    "content_type": "contentType",
+    "contents": "contents",
+    "currency": "currency",
+    "delivery_category": "deliveryCategory",
+    "event_id": "eventId",
+    "num_items": "numItems",
+    "order_id": "orderId",
+    "predicted_ltv": "predictedLtv",
+    "search_string": "searchString",
+    "status": "status",
+    "value": "value",
+  };
   let propMap = {
     "AddPaymentInfo": ["content_name", "event_id", "content_category", "content_ids", "contents", "currency", "value", "order_id", "delivery_category"],
     "AddToCart": ["event_id", "content_ids", "content_name", "content_type", "contents", "currency", "value", "order_id", "delivery_category"],
@@ -105,94 +86,70 @@ function extractFbqProps(data, fields, gtmData){
   };
 
   let objectData = {};
-  if (propMap[data.StandardEvents]){
-    propMap[data.StandardEvents].forEach((key) => {
-      if (data[key]){
-        objectData[key] = data[key];
+  if (propMap[data.eventName]){
+    propMap[data.eventName].forEach((key) => {
+      if (data[nameMap[key]]){
+        objectData[key] = data[nameMap[key]];
       }
     }, {});
   }
 
   objectData = {
     ...objectData,
-    ...createUserDataObject(data, fields, gtmData),
+    ...createUserDataObject(data),
   };
 
   return objectData;
 }
 
-function injectBasePixelCode(data){
+//copied from facebook
+function injectPixel(){
+  //f=window
+  //b=document
+  //e=script url
+  //v="script"
+  !function(f, b, e, v, n, t, s) {
+    if (f.fbq) {
+      return;
+    }
+    n = f.fbq = function(){
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq){
+      f._fbq = n;
+    }
+
+    n.push = n;
+    n.loaded = !0;
+    n.version = "2.0";
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+}
+
+function initPixel(data){
+  fbq("init", data.pixelId);
+}
+
+function setupPixel(data){
   if (typeof fbq !== "function"){
-    log("Pixel not defined - defining");
-    //f=window
-    //b=document
-    //e=script url
-    //v="script"
-    !function(f, b, e, v, n, t, s) {
-      if (f.fbq) {
-        return;
-      }
-      n = f.fbq = function(){
-        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq){
-        f._fbq = n;
-      }
-
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-
-    fbq("init", data.pixelId);
-    fbq("track", "PageView");
-  } else {
-    log("Pixel already defined");
+    injectPixel();
+    initPixel(data);
   }
 }
 
-async function validateKey(data){
-  return new Promise((resolve, reject) => {
-    let query = "?";
-    query += "wc-api=software-api";
-    query += "&request=check";
-    query += "&product_id=DeviateToolsCapi_Prod"; //not necessary after the new migration, only here to make the migration easier
-    query += `&email=${encodeURIComponent(data.LicensedEmail)}`;
-    query += `&license_key=${data.apiAccessToken}`;
-    let url = `https://deviatetracking.com/${query}`;
-    fetch(url)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res?.success){
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+function sendServerEvent(data){
+//let url = `${"https://v3.api.deviatetracking.com/capi?data="}${JSON.stringify(data)}`;
+  let url = `http://localhost:4080/capi?data=${JSON.stringify(data)}`;
+
+  fetch(url);
 }
 
 async function fireDeviateTracking(data){
-  //first layer of validation
-  //if not valid, no need to waste cpu on the rest of this function
-  //key will be validated a second time when the capi request is submitted to prevent xss
-  if (! (await validateKey(data))){
-    console.error("Invalid DeviateTracking key");
-    data.gtmOnFailure("Invalid DeviateTracking key");
-    return;
-  }
-
   //convert gtm default values to null
   for (const [key, value] of Object.entries(data)){
     if ((value === "None") || (value === "Automatic") || (value === "EventId")){
@@ -200,125 +157,103 @@ async function fireDeviateTracking(data){
     }
   }
 
-  //get ip
-  let gtmData = await fetch("https://api.ipify.org/?format=json")
-    .then((response) => {
-      return response.json();
-    })
-    .then((ipData) => {
-      return {ua: window.navigator.userAgent, ip: ipData.ip};
-    });
+  //inject pixel if necessary
+  setupPixel(data);
 
-  //will only actually do it if hasn't been done already
-  injectBasePixelCode(data);
+  //set ua
+  if (!data.userData){
+    data.userData = {};
+  }
+  data.userData.userAgent = window.navigator.userAgent;
 
-
+  //set exid if user didn't override it
+  if (!data.externalId){
+    data.externalId = window.navigator.userAgent;
+  }
+  data.eventSourceUrl = window.location.href;
 
   //generate an event id if user didn't give one
-  if (!data.DeduplicationEventID){
-    data.DeduplicationEventID = uuidv4();
+  if (!data.eventId){
+    data.eventId = uuidv4();
   }
 
-  const fields = {};
+  //send event to the deviatetracking capi server
 
-  let shaPromises = [
-    sha256(data.email).then((digest) => {
-      if (data.email){
-        fields.email = digest;
-      }
-    }),
-    sha256(data.phone).then((digest) => {
-      if (data.phone){
-        fields.phone = digest;
-      }
-    }),
-    sha256(data.gender).then((digest) => {
-      if (data.gender){
-        fields.gender = digest;
-      }
-    }),
-    sha256(data.dateOfBirth).then((digest) => {
-      if (data.dateOfBirth){
-        fields.dateOfBirth = digest;
-      }
-    }),
-    sha256(data.lastName).then((digest) => {
-      if (data.lastName){
-        fields.lastName = digest;
-      }
-    }),
-    sha256(data.firstName).then((digest) => {
-      if (data.firstName){
-        fields.firstName = digest;
-      }
-    }),
-    sha256(data.city).then((digest) => {
-      if (data.city){
-        fields.city = digest;
-      }
-    }),
-    sha256(data.state).then((digest) => {
-      if (data.state){
-        fields.state = digest;
-      }
-    }),
-    sha256(data.zip).then((digest) => {
-      if (data.zip){
-        fields.zip = digest;
-      }
-    }),
-    sha256(data.country).then((digest) => {
-      if (data.country){
-        fields.country = digest;
-      }
-    }),
-    sha256(data.externalId).then((digest) => {
-      if (data.externalId){
-        fields.externalId = digest;
-      }
-    }),
-  ];
-  await Promise.all(shaPromises)
-    .then(() => {
-      const objprop = createCapiObject(data, fields, gtmData);
+  if (data.sendServerEvent){
+    sendServerEvent(data);
+  }
 
-      //send Get Request to Deviate Tracking API
-      //eslint-disable-next-line prefer-template
-      const url = "https://v2.api.deviatetracking.com/license/validate?" +
-          "license_key=" + encodeURIComponent(data.apiAccessToken) +
-          "&email=" + encodeURIComponent(data.LicensedEmail) +
-          "&fbaccess_tkn=" + encodeURIComponent(data.FBToken) +
-          "&additional_data=" + encodeURIComponent(objprop) +
-          "&product_id=DeviateToolsCapi_Prod" +
-          "&fbpixel_id=" + encodeURIComponent(data.pixelId) +
-          "&test_event_code=" + data.TestEventLabel;
-      if (data.sendServerEvent){
-        log("Sending server event");
-        fetch(url)
-          .then(() => {
-            data.gtmOnSuccess();
-          })
-          .catch((err) => {
-            data.gtmOnFailure();
-          });
-      }
-
-      if (data.sendBrowserEvent){
-        log("Sending browser event");
-        let objectData = extractFbqProps(data, fields, gtmData);
-        fbq("track", data.StandardEvents, objectData, {eventID: data.DeduplicationEventID});
-      }
-
-      data.gtmOnSuccess();
-    });
+  if (data.sendBrowserEvent){
+    let shaPromises = [
+      sha256(data.userData.email).then((digest) => {
+        if (data.userData.email){
+          data.userData.email = digest;
+        }
+      }),
+      sha256(data.userData.phone).then((digest) => {
+        if (data.userData.phone){
+          data.userData.phone = digest;
+        }
+      }),
+      sha256(data.userData.gender).then((digest) => {
+        if (data.userData.gender){
+          data.userData.gender = digest;
+        }
+      }),
+      sha256(data.userData.dateOfBirth).then((digest) => {
+        if (data.userData.dateOfBirth){
+          data.userData.dateOfBirth = digest;
+        }
+      }),
+      sha256(data.userData.lastName).then((digest) => {
+        if (data.userData.lastName){
+          data.userData.lastName = digest;
+        }
+      }),
+      sha256(data.userData.firstName).then((digest) => {
+        if (data.userData.firstName){
+          data.userData.firstName = digest;
+        }
+      }),
+      sha256(data.userData.city).then((digest) => {
+        if (data.userData.city){
+          data.userData.city = digest;
+        }
+      }),
+      sha256(data.userData.state).then((digest) => {
+        if (data.userData.state){
+          data.userData.state = digest;
+        }
+      }),
+      sha256(data.userData.zip).then((digest) => {
+        if (data.userData.zip){
+          data.userData.zip = digest;
+        }
+      }),
+      sha256(data.userData.country).then((digest) => {
+        if (data.userData.country){
+          data.userData.country = digest;
+        }
+      }),
+      sha256(data.userData.externalId).then((digest) => {
+        if (data.userData.externalId){
+          data.userData.externalId = digest;
+        }
+      }),
+    ];
+    await Promise.all(shaPromises)
+      .then(() => {
+        let objectData = extractFbqProps(data);
+        fbq("track", data.eventName, objectData, {eventID: data.eventId});
+      });
+  }
 }
 
 if (typeof exports !== "undefined") {
   module.exports = {
     fireDeviateTracking,
-    validateKey,
   };
 } else {
   window.fireDeviateTracking = fireDeviateTracking;
-  log("Deviate Tracking 4.0 active");
+  console.log("Deviate Tracking active");
 }

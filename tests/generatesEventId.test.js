@@ -9,56 +9,48 @@ describe("event id generation", () => {
   it("should not generate an event id if one is provided", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    data.DeduplicationEventID = "acustomeventid";
+    data.eventId = "acustomeventid";
 
     return tmp.fireDeviateTracking(global.data)
       .then(() => {
         expect(global.fbq).toHaveBeenCalledWith(expect.anything(), expect.anything(), expect.anything(), expect.objectContaining({eventID: "acustomeventid"}));
-        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"event_id\":")));
-        expect(data.gtmOnSuccess).toHaveBeenCalled();
-        expect(data.gtmOnFailure).not.toHaveBeenCalled();
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("\"eventId\":"));
       });
   });
 
   it("should generate an event id if none is provided", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    delete data.DeduplicationEventID;
+    delete data.eventId;
 
     return tmp.fireDeviateTracking(global.data)
       .then(() => {
         expect(global.fbq).toHaveBeenCalledWith(expect.anything(), expect.anything(), expect.anything(), expect.objectContaining({eventID: "ffffffff-ffff-4fff-bfff-ffffffffffff"}));
-        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"event_id\":")));
-        expect(data.gtmOnSuccess).toHaveBeenCalled();
-        expect(data.gtmOnFailure).not.toHaveBeenCalled();
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("\"eventId\":"));
       });
   });
 
   it("should generate an event id if it's set to 'None'", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    data.DeduplicationEventID = "None";
+    data.eventId = "None";
 
     return tmp.fireDeviateTracking(global.data)
       .then(() => {
         expect(global.fbq).toHaveBeenCalledWith(expect.anything(), expect.anything(), expect.anything(), expect.objectContaining({eventID: "ffffffff-ffff-4fff-bfff-ffffffffffff"}));
-        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"event_id\":")));
-        expect(data.gtmOnSuccess).toHaveBeenCalled();
-        expect(data.gtmOnFailure).not.toHaveBeenCalled();
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("\"eventId\":"));
       });
   });
 
   it("should generate an event id if it's set to 'Automatic'", async() => {
     data.sendServerEvent = true;
     data.sendBrowserEvent = true;
-    data.DeduplicationEventID = "Automatic";
+    data.eventId = "Automatic";
 
     return tmp.fireDeviateTracking(global.data)
       .then(() => {
         expect(global.fbq).toHaveBeenCalledWith(expect.anything(), expect.anything(), expect.anything(), expect.objectContaining({eventID: "ffffffff-ffff-4fff-bfff-ffffffffffff"}));
-        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching(encodeURIComponent("\"event_id\":")));
-        expect(data.gtmOnSuccess).toHaveBeenCalled();
-        expect(data.gtmOnFailure).not.toHaveBeenCalled();
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringMatching("\"eventId\":"));
       });
   });
 });
