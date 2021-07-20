@@ -191,7 +191,6 @@ async function fireDeviateTracking(data){
   }
 
   //send event to the deviatetracking capi server
-
   if (data.sendServerEvent){
     sendServerEvent(data);
   }
