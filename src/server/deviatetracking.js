@@ -149,6 +149,19 @@ function sendServerEvent(data){
   fetch(url);
 }
 
+async function getIp(){
+  if (!window.ip){
+    await fetch("https://api.ipify.org/?format=json")
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        window.ip = data.ip;
+      });
+  }
+  return window.ip;
+}
+
 async function fireDeviateTracking(data){
   //convert gtm default values to null
   for (const [key, value] of Object.entries(data)){
@@ -167,8 +180,8 @@ async function fireDeviateTracking(data){
   data.userData.userAgent = window.navigator.userAgent;
 
   //set exid if user didn't override it
-  if (!data.externalId){
-    data.externalId = window.navigator.userAgent;
+  if (!data.userData.externalId){
+    data.userData.externalId = window.navigator.userAgent + await getIp();
   }
   data.eventSourceUrl = window.location.href;
 
