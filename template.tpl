@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -71,28 +63,28 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
-    "name": "fbToken",
+    "name": "FBToken",
     "displayName": "Facebook Token",
     "simpleValueType": true,
     "help": "Please review the help documentation to get an access token: https://developers.facebook.com/docs/marketing-api/conversions-api/get-started#access-token"
   },
   {
     "type": "TEXT",
-    "name": "dtKey",
+    "name": "apiAccessToken",
     "displayName": "Deviate Tracking License Key",
     "simpleValueType": true,
     "help": "This key will be provided to you via Email on purchase, if you didn\u0027t receive this, please contact us at hello@deviatetracking.com"
   },
   {
     "type": "TEXT",
-    "name": "dtEmail",
+    "name": "LicensedEmail",
     "displayName": "Deviate Tracking Licensed Email",
     "simpleValueType": true,
     "help": "This is the email that you used when you purchased a key, if you are getting an error please email us at hello@deviatetracking.com"
   },
   {
     "type": "SELECT",
-    "name": "eventName",
+    "name": "StandardEvents",
     "displayName": "Facebook Standard Event Name",
     "macrosInSelect": false,
     "selectItems": [
@@ -187,7 +179,7 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "customData",
+    "name": "ObjectProperties",
     "displayName": "Object Properties",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
@@ -200,7 +192,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
-        "name": "eventId",
+        "name": "DeduplicationEventID",
         "displayName": "Deduplication Event ID",
         "macrosInSelect": true,
         "selectItems": [],
@@ -218,7 +210,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "contentCategory",
+        "name": "content_category",
         "displayName": "content_category",
         "simpleValueType": true,
         "enablingConditions": [
@@ -257,7 +249,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "contentIds",
+        "name": "content_ids",
         "displayName": "content_ids",
         "simpleValueType": true,
         "enablingConditions": [
@@ -301,7 +293,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "contentName",
+        "name": "content_name",
         "displayName": "content_name",
         "simpleValueType": true,
         "help": "Name of the page/product",
@@ -315,7 +307,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "contentType",
+        "name": "content_type",
         "displayName": "content_type",
         "simpleValueType": true,
         "enablingConditions": [
@@ -663,7 +655,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "numItems",
+        "name": "num_items",
         "displayName": "num_items",
         "simpleValueType": true,
         "enablingConditions": [
@@ -682,7 +674,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "predictedLtv",
+        "name": "predicted_ltv",
         "displayName": "predicted_ltv",
         "simpleValueType": true,
         "enablingConditions": [
@@ -701,7 +693,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "searchString",
+        "name": "search_string",
         "displayName": "search_string",
         "simpleValueType": true,
         "enablingConditions": [
@@ -809,13 +801,13 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "orderId",
+        "name": "order_id",
         "displayName": "Order ID",
         "simpleValueType": true
       },
       {
         "type": "SELECT",
-        "name": "deliveryCategory",
+        "name": "delivery_category",
         "displayName": "Delivery category",
         "selectItems": [
           {
@@ -840,7 +832,7 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "userData",
+    "name": "UserDataParameters",
     "displayName": "User Data Parameters",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
@@ -939,7 +931,7 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
-    "name": "testCode",
+    "name": "TestEventLabel",
     "displayName": "Test Event Code",
     "simpleValueType": true,
     "enablingConditions": [
@@ -993,28 +985,28 @@ const getCookieValues = require("getCookieValues");
 
 let formattedData = {
   pixelId: data.pixelId,
-  fbToken: data.fbToken,
-  dtKey: data.dtKey,
-  dtEmail: data.dtEmail,
-  eventName: data.eventName,
-  testCode: data.testCode,
+  fbToken: data.FBToken,
+  dtKey: data.apiAccessToken,
+  dtEmail: data.LicensedEmail,
+  eventName: data.StandardEvents,
+  testCode: data.TestEventLabel,
   sendServerEvent: data.sendServerEvent,
   sendBrowserEvent: data.sendBrowserEvent,
   customData:{
-    eventId: data.eventId,
-    contentCategory: data.contentCategory,
-    contentIds: data.contentIds,
-    contentName: data.contentName,
-    contentType: data.contentType,
+    eventId: data.DeduplicationEventID,
+    contentCategory: data.content_category,
+    contentIds: data.content_ids,
+    contentName: data.content_name,
+    contentType: data.content_type,
     contents: data.contents,
     currency: data.currency,
-    numItems: data.numItems,
-    predictedLtv: data.predictedLtv,
-    searchString: data.searchString,
+    numItems: data.num_items,
+    predictedLtv: data.predicted_ltv,
+    searchString: data.search_string,
     status: data.status,
     value: data.value,
-    orderId: data.orderId,
-    deliveryCategory: data.deliveryCategory,
+    orderId: data.order_id,
+    deliveryCategory: data.delivery_category,
   },
   userData: {
     email: data.email,
@@ -1029,13 +1021,14 @@ let formattedData = {
     country: data.country,
     externalId: data.externalId,
     subscriptionId: data.subscriptionId,
-    fbLoginId: data.fbLoginId,
+    fbLoginId: data.facebookLoginId,
   }
 };
 
-injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking-staging.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
+injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking-5.0.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   fireDeviateTracking(formattedData);
+  data.gtmOnSuccess();
 }, (e) => {
   log("ERROR");
   log(e);
@@ -1358,6 +1351,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 7/16/2021, 1:50:43 PM
+Created on 7/21/2021, 2:09:23 PM
 
 

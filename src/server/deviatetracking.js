@@ -143,8 +143,8 @@ function setupPixel(data){
 }
 
 function sendServerEvent(data){
-//let url = `${"https://v3.api.deviatetracking.com/capi?data="}${JSON.stringify(data)}`;
-  let url = `http://localhost:4080/capi?data=${JSON.stringify(data)}`;
+  let url = `${"https://v5.api.deviatetracking.com/capi?data="}${JSON.stringify(data)}`;
+  //let url = `http://localhost:4080/capi?data=${JSON.stringify(data)}`;
 
   fetch(url);
 }
