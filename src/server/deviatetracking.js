@@ -1,8 +1,5 @@
 function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
 }
 
 async function sha256(message) {
@@ -132,13 +129,15 @@ function injectPixel(){
 }
 
 function initPixel(data){
-  fbq("init", data.pixelId);
+  console.log("fbq init", data.eventName, data.testCode);
+  fbq("init", data.pixelId, {"extern_id": data.userData.externalId});
 }
 
 function setupPixel(data){
   if (typeof fbq !== "function"){
     injectPixel();
     initPixel(data);
+    console.log("Deviate Tracking pixel injected");
   }
 }
 
@@ -150,16 +149,28 @@ function sendServerEvent(data){
 }
 
 async function getIp(){
-  if (!window.ip){
-    await fetch("https://api.ipify.org/?format=json")
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => {
-        window.ip = data.ip;
-      });
-  }
-  return window.ip;
+  return new Promise((resolve, reject) => {
+    if (window.ip){ //someone already fetched the ip so just return it
+      resolve(window.ip);
+    } else if (!window.fetchingIp){ //we are the first thread to need the ip, so fetch it
+      window.fetchingIp = true;
+      fetch("https://api.ipify.org/?format=json")
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          window.ip = data.ip;
+          resolve(window.ip);
+        });
+    } else { //someone else is busy fetching the ip, so wait for them
+      const interval = setInterval(function() {
+        if (window.ip) {
+          clearInterval(interval);
+          resolve(window.ip);
+        }
+      }, 200);
+    }
+  });
 }
 
 async function fireDeviateTracking(data){
@@ -178,12 +189,12 @@ async function fireDeviateTracking(data){
     data.userData = {};
   }
   data.userData.userAgent = window.navigator.userAgent;
+  data.eventSourceUrl = window.location.href;
 
   //set exid if user didn't override it
   if (!data.userData.externalId){
     data.userData.externalId = window.navigator.userAgent + await getIp();
   }
-  data.eventSourceUrl = window.location.href;
 
   //generate an event id if user didn't give one
   if (!data.eventId){
@@ -192,6 +203,7 @@ async function fireDeviateTracking(data){
 
   //send event to the deviatetracking capi server
   if (data.sendServerEvent){
+    console.log("capi track", data.eventName);
     sendServerEvent(data);
   }
 
@@ -256,6 +268,7 @@ async function fireDeviateTracking(data){
     await Promise.all(shaPromises)
       .then(() => {
         let objectData = extractFbqProps(data);
+        console.log("fbq track", data.eventName);
         fbq("track", data.eventName, objectData, {eventID: data.eventId});
       });
   }
@@ -267,5 +280,4 @@ if (typeof exports !== "undefined") {
   };
 } else {
   window.fireDeviateTracking = fireDeviateTracking;
-  console.log("Deviate Tracking active");
 }
