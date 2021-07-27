@@ -1,6 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
+  - sha: 5d8ba54f528aa3a34bbdc4897105f198951eb829
+    changeNotes: v5.0.0 Architectural rewrite for improved performance and numerous bug fixes.
   - sha: 44c2c071e93293620cc62f1e8f2947d599311144
     changeNotes: v4.0.0 Consolidates server side and browser side events so you dont need to set an EventID.
   - sha: 4eab818e0ec76dea189db8c29cb1a019c5982d4a
