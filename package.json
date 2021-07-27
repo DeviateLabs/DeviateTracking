@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest --env=./jest-environment.js --max-workers=32 --no-cache",
-    "watch": "jest --watch --env=./jest-environment.js --max-workers=32 --no-cache",
-    "coverage": "jest --coverage --env=./jest-environment.js --max-workers=32 --no-cache"
+    "build": "webpack",
+    "test": "jest --max-workers=32 --no-cache",
+    "coverage": "jest --coverage --max-workers=32 --no-cache"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,19 @@
   "homepage": "https://github.com/DeviateLabs/DeviateTracking#readme",
   "dependencies": {
     "@peculiar/webcrypto": "^1.1.7",
-    "jest": "^27.0.4"
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-requirejs": "^1.4.0",
+    "jest": "^27.0.4",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "jest-mock-random": "^1.1.1"
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "gulp-babel": "^8.0.0",
+    "jest-mock-random": "^1.1.1",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-stream": "^6.1.2"
   }
 }
