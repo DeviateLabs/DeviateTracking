@@ -35,3 +35,9 @@ Deviate Tracking works on all Javascript-enabled devices, including Apple, Andro
 ### Advanced Tracking Options
 
 Facebook's native partner integrations restrict the types of events you can track to a pre-defined list. Deviate Tracking includes support for these "standard events" but also allows you to add your own, enabling you to craft powerful and in-depth conversion events. Increasing your marketing ROI has never been easier.
+
+## Development
+
+- `npm run build` to compile deviatetracking.js
+- `npm run test` to execute the unit tests
+- `npm run coverage` to execute the unit tests and get coverage stats
