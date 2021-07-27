@@ -1021,7 +1021,7 @@ let formattedData = {
     country: data.country,
     externalId: data.externalId,
     subscriptionId: data.subscriptionId,
-    fbLoginId: data.facebookLoginId,
+    fbLoginId: data.fbLoginId,
   }
 };
 
