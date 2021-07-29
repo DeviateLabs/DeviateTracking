@@ -52,6 +52,23 @@ describe("processData", () => {
     expect(data).toEqual(expect.objectContaining({"userData": expect.objectContaining({key: "value"})}));
   });
 
+  it("should add an ip userData key from window.ip", async() => {
+    let data = {
+      sendIpAddress: true,
+    };
+    global.window.ip = "192.168.192.168";
+    await processData(data);
+    expect(data).toEqual(expect.objectContaining({"userData": expect.objectContaining({"ipAddress": "192.168.192.168"})}));
+  });
+  it("should not add an ip userData key if !sendIpAddress", async() => {
+    let data = {
+      sendIpAddress: false,
+    };
+    global.window.ip = "192.168.192.168";
+    await processData(data);
+    expect(data).not.toEqual(expect.objectContaining({"userData": expect.objectContaining({"ipAddress": "192.168.192.168"})}));
+  });
+
   it("should set userData.userAgent", async() => {
     let data = {};
     await processData(data);

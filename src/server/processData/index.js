@@ -14,9 +14,15 @@ module.exports = async function processData(data){
   data.userData.userAgent = window.navigator.userAgent;
   data.eventSourceUrl = window.location.href;
 
+  //set ip
+  await getIp();
+  if (data.sendIpAddress){
+    data.userData.ipAddress = window.ip;
+  }
+
   //set exid if user didn't override it
   if (!data.userData.externalId){
-    data.userData.externalId = window.navigator.userAgent + await getIp();
+    data.userData.externalId = window.navigator.userAgent + window.ip;
   }
 
   //generate an event id if user didn't give one

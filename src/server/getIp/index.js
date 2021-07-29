@@ -1,4 +1,4 @@
-module.exports = async function getIp(){
+module.exports = async function getIp(data){
   return new Promise((resolve, reject) => {
     if (window.ip){ //someone already fetched the ip so just return it
       resolve(window.ip);
