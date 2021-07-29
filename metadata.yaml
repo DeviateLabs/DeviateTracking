@@ -1,6 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
+  - sha: eb8f1e8bc333a3d3099a130efa91216b846eff4e
+    changeNotes: Add IP switch to user data parameters. Minor performance improvements.
   - sha: 5d8ba54f528aa3a34bbdc4897105f198951eb829
     changeNotes: v5.0.0 Architectural rewrite for improved performance and numerous bug fixes.
   - sha: 44c2c071e93293620cc62f1e8f2947d599311144
