@@ -926,6 +926,13 @@ ___TEMPLATE_PARAMETERS___
         "name": "fbLoginId",
         "displayName": "Facebook login ID",
         "simpleValueType": true
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "sendIpAddress",
+        "checkboxText": "Send IP address",
+        "simpleValueType": true,
+        "help": "Facebook may not permit user IP addresses to be sent in your country. If you see an error in your Events Manager that says \"Potentially Violating Personal Data Sent to Facebook\", you should disable this feature."
       }
     ],
     "help": "These user data parameters are used to associate your users with a Facebook account, as well as helping to associate your event conversions with a similar audience.  None of these parameters are required, for more information visit: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#user-data\n\nAll the following information is automatically hashed."
@@ -1000,6 +1007,7 @@ let formattedData = {
   testCode: data.TestEventLabel,
   sendServerEvent: data.sendServerEvent,
   sendBrowserEvent: data.sendBrowserEvent,
+  sendIpAddress: data.sendIpAddress,
   customData:{
     eventId: data.DeduplicationEventID,
     contentCategory: data.content_category,
@@ -1033,7 +1041,7 @@ let formattedData = {
   }
 };
 
-injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking-5.0.0.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
+injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   fireDeviateTracking(formattedData);
   data.gtmOnSuccess();
