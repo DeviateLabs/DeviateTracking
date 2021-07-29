@@ -47,11 +47,6 @@ describe("setupPixel", () => {
     expect(initPixel).not.toHaveBeenCalled();
   });
 
-  it("logs a notification", async() => {
-    setupPixel({});
-    expect(console.log).toHaveBeenCalledWith("Deviate Tracking pixel injected");
-  });
-
   it("does not log a notification if fbq defined", async() => {
     global.fbq = jest.fn(() => {});
     setupPixel({});

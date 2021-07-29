@@ -9,6 +9,7 @@ module.exports = function createUserDataObject(data){
     ...data?.userData?.email && {"em": data.userData.email},
     ...data?.userData?.phone && {"ph": data.userData.phone},
     ...data?.userData?.city && {"ct": data.userData.city},
+    ...data?.userData?.ipAddress && {"client_ip_address": data.userData.ipAddress},
     ...data?.userData?.userAgent && {"client_user_agent": data.userData.userAgent},
     ...data?.userData?.dateOfBirth && {"db": data.userData.dateOfBirth},
     ...data?.userData?.country && {"country": data.userData.country},

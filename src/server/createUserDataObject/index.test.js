@@ -245,6 +245,23 @@ describe("createUserData zip", () => {
 });
 
 
+describe("createUserData ipAddress", () => {
+  it("should output an ipAddress key", async() => {
+    let result = createUserData({userData: {ipAddress: "test"}});
+    expect(result).toEqual(expect.objectContaining({"client_ip_address": "test"}));
+  });
+  it("should not output a null ipAddress key", async() => {
+    let result = createUserData({userData: {ipAddress: null}});
+    expect(result).not.toEqual(expect.objectContaining({"client_ip_address": expect.anything()}));
+  });
+  it("should not output an undefined ipAddress key", async() => {
+    let result = createUserData({userData: {ipAddress: undefined}});
+    expect(result).not.toEqual(expect.objectContaining({"client_ip_address": expect.anything()}));
+  });
+});
+
+
+
 describe("createUserData", () => {
   it("ignores extra keys", async() => {
     let result = createUserData({doesnotexist: "mea"});

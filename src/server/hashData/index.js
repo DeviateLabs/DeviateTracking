@@ -59,7 +59,6 @@ module.exports = async function hashData(data){
       data.userData.country = digest;
     }));
   }
-
   if (data.userData.externalId){
     shaPromises.push(sha256(data.userData.externalId).then((digest) => {
       data.userData.externalId = digest;

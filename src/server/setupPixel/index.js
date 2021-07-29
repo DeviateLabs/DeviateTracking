@@ -5,6 +5,5 @@ module.exports = function setupPixel(data){
   if (typeof fbq !== "function"){
     injectPixel();
     initPixel(data);
-    console.log("Deviate Tracking pixel injected");
   }
 };
