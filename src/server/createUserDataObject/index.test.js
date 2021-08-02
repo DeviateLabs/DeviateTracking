@@ -108,7 +108,7 @@ describe("createUserData fbLoginId", () => {
 
 describe("createUserData fbc", () => {
   it("should output an fbc key", async() => {
-    let result = createUserData({userData: {fbc: ["test"]}});
+    let result = createUserData({userData: {fbc: "test"}});
     expect(result).toEqual(expect.objectContaining({"fbc": "test"}));
   });
   it("should not output a null fbc key", async() => {
@@ -139,7 +139,7 @@ describe("createUserData externalId", () => {
 
 describe("createUserData fbp", () => {
   it("should output an fbp key", async() => {
-    let result = createUserData({userData: {fbp: ["test"]}});
+    let result = createUserData({userData: {fbp: "test"}});
     expect(result).toEqual(expect.objectContaining({"fbp": "test"}));
   });
   it("should not output a null fbp key", async() => {

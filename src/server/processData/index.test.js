@@ -1,11 +1,13 @@
 jest.mock("../getIp/index.js");
 jest.mock("../convertDefaults/index.js");
 jest.mock("../uuidv4/index.js");
+jest.mock("../setFbCookies/index.js");
 
 const processData = require("./index.js");
 const getIp = require("../getIp/index.js");
 const convertDefaults = require("../convertDefaults/index.js");
 const uuidv4 = require("../uuidv4/index.js");
+const setFbCookies = require("../setFbCookies/index.js");
 
 
 beforeEach(() => {
@@ -31,6 +33,10 @@ beforeEach(() => {
   });
 
   uuidv4.mockImplementation(() => {
+    return "fake-guid";
+  });
+
+  setFbCookies.mockImplementation(() => {
     return "fake-guid";
   });
 });

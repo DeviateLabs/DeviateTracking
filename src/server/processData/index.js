@@ -1,6 +1,7 @@
 const getIp = require("../getIp/index.js");
 const convertDefaults = require("../convertDefaults/index.js");
 const uuidv4 = require("../uuidv4/index.js");
+const setFbCookies = require("../setFbCookies/index.js");
 
 module.exports = async function processData(data){
   //convert none, automatic, etc to null
@@ -13,6 +14,8 @@ module.exports = async function processData(data){
 
   data.userData.userAgent = window.navigator.userAgent;
   data.eventSourceUrl = window.location.href;
+
+  setFbCookies(data);
 
   //set ip
   await getIp();
