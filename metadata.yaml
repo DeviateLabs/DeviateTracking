@@ -1,6 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/docs"
 versions:
+  - sha: 90f76c76881e5aa1a107337fdab87fa933fe66f6
+    changeNotes: v5.1.1 Fix manual event id not working.
   - sha: eb8f1e8bc333a3d3099a130efa91216b846eff4e
     changeNotes: v5.1.0 Add IP switch to user data parameters. Minor performance improvements.
   - sha: 5d8ba54f528aa3a34bbdc4897105f198951eb829
