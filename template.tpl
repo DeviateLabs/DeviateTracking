@@ -1008,8 +1008,8 @@ let formattedData = {
   sendServerEvent: data.sendServerEvent,
   sendBrowserEvent: data.sendBrowserEvent,
   sendIpAddress: data.sendIpAddress,
+  eventId: data.DeduplicationEventID,
   customData:{
-    eventId: data.DeduplicationEventID,
     contentCategory: data.content_category,
     contentIds: data.content_ids,
     contentName: data.content_name,
