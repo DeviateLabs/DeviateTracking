@@ -6,4 +6,5 @@ module.exports = {
     filename: "deviatetracking.js",
     path: path.resolve(__dirname, "build"),
   },
+  mode: "production",
 };
