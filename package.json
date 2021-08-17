@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "dev": "SOURCE_MAP=true webpack",
     "test": "jest --max-workers=32 --no-cache",
     "coverage": "jest --coverage --max-workers=32 --no-cache"
   },

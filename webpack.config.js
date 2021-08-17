@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = {
+let config = {
   entry: "./src/server/index.js",
   output: {
     filename: "deviatetracking.js",
@@ -8,3 +8,9 @@ module.exports = {
   },
   mode: "production",
 };
+
+if (process.env.SOURCE_MAP){
+  config.devtool = "eval-source-map";
+}
+
+module.exports = config;
