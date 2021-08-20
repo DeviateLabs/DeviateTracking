@@ -20,5 +20,11 @@ module.exports = async function setFbCookies(data){
   }
   if (fbc){
     data.userData.fbc = fbc;
+  } else {
+    let urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    if (params.fbclid){
+      data.userData.fbc = `fb.1.${Date.now()}.${params.fbclid}`;
+    }
   }
 };
