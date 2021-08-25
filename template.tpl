@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -64,10 +56,17 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
-    "name": "pixelId",
-    "displayName": "Facebook Pixel ID",
+    "name": "LicensedEmail",
+    "displayName": "Deviate Tracking Email",
     "simpleValueType": true,
-    "help": "Please follow these instructions to get your Facebook Pixel ID: https://www.facebook.com/business/help/952192354843755"
+    "help": "This is the email that you used when you purchased a key, if you are getting an error please email us at hello@deviatetracking.com"
+  },
+  {
+    "type": "TEXT",
+    "name": "apiAccessToken",
+    "displayName": "Deviate Tracking Key",
+    "simpleValueType": true,
+    "help": "This key will be provided to you via email on purchase, if you didn\u0027t receive this, please contact us at customersuccess@deviatetracking.com. \n\nThis is NOT your Deviate Tracking account password."
   },
   {
     "type": "TEXT",
@@ -78,22 +77,15 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
-    "name": "apiAccessToken",
-    "displayName": "Deviate Tracking License Key",
+    "name": "pixelId",
+    "displayName": "Facebook Pixel ID",
     "simpleValueType": true,
-    "help": "This key will be provided to you via Email on purchase, if you didn\u0027t receive this, please contact us at hello@deviatetracking.com"
-  },
-  {
-    "type": "TEXT",
-    "name": "LicensedEmail",
-    "displayName": "Deviate Tracking Licensed Email",
-    "simpleValueType": true,
-    "help": "This is the email that you used when you purchased a key, if you are getting an error please email us at hello@deviatetracking.com"
+    "help": "Please follow these instructions to get your Facebook Pixel ID: https://www.facebook.com/business/help/952192354843755"
   },
   {
     "type": "SELECT",
     "name": "StandardEvents",
-    "displayName": "Facebook Standard Event Name",
+    "displayName": "Event Type",
     "macrosInSelect": false,
     "selectItems": [
       {
