@@ -1,4 +1,4 @@
-module.exports = function injectPixel(){
+module.exports = function injectBaseCode(){
   //f=window
   //b=document
   //e=script url

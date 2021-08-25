@@ -19,7 +19,7 @@ module.exports = async function fireDeviateTracking(data){
   }
 
   //inject and init pixel if necessary
-  setupPixel(data);
+  await setupPixel(data);
 
   //send event directly to facebook
   if (data.sendBrowserEvent){

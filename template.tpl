@@ -964,22 +964,45 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
-    "type": "CHECKBOX",
-    "name": "sendServerEvent",
-    "checkboxText": "Send Server Event",
-    "simpleValueType": true,
-    "defaultValue": true,
-    "help": "Send events to Facebook through the Deviate Tracking CAPI server",
-    "alwaysInSummary": true
-  },
-  {
-    "type": "CHECKBOX",
-    "name": "sendBrowserEvent",
-    "checkboxText": "Send Browser Event",
-    "simpleValueType": true,
-    "defaultValue": true,
-    "help": "Send events directly to Facebook from the browser",
-    "alwaysInSummary": true
+    "type": "GROUP",
+    "name": "advanced",
+    "displayName": "Advanced",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "sendServerEvent",
+        "checkboxText": "Send server event",
+        "simpleValueType": true,
+        "defaultValue": true,
+        "help": "Send events to Facebook through the Deviate Tracking CAPI server"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "sendBrowserEvent",
+        "checkboxText": "Send browser event",
+        "simpleValueType": true,
+        "defaultValue": true,
+        "help": "Send events to Facebook directly from the browser"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "initializePixel",
+        "checkboxText": "Initialize Pixel",
+        "simpleValueType": true,
+        "defaultValue": true,
+        "help": "Initialize the pixel associated with this tag, if not already initialized"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "injectBaseCode",
+        "checkboxText": "Inject Base Code",
+        "simpleValueType": true,
+        "help": "Inject the Facebook pixel base code, if not already present",
+        "defaultValue": true
+      }
+    ],
+    "help": "The options in this section can break your tracking. Do not change them unless you are absolutely certain that you need to."
   }
 ]
 
@@ -1008,8 +1031,10 @@ let formattedData = {
   sendServerEvent: data.sendServerEvent,
   sendBrowserEvent: data.sendBrowserEvent,
   sendIpAddress: data.sendIpAddress,
-  eventId: data.DeduplicationEventID,
+  initializePixel: data.initializePixel,
+  injectBaseCode: data.injectBaseCode,
   customData:{
+    eventId: data.DeduplicationEventID,
     contentCategory: data.content_category,
     contentIds: data.content_ids,
     contentName: data.content_name,
@@ -1040,7 +1065,7 @@ let formattedData = {
     fbLoginId: data.fbLoginId,
   }
 };
-
+log("template data", formattedData);
 injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   fireDeviateTracking(formattedData);
