@@ -98,4 +98,22 @@ describe("fireDeviateTracking", () => {
     await fireDeviateTracking(data);
     expect(setupPixel).toHaveBeenCalledWith(data);
   });
+
+
+  it("hashes before setting up the pixel", async() => {
+    let data = {
+      sendBrowserEvent: true,
+      key: "value",
+      userData: {
+        externalId: "abcdef"
+      }
+    };
+
+    hashData.mockImplementation((data) => {
+      data.userData.externalId = "bef57ec7f53a6d40beb640a780a639c83bc29ac8a9816f1fc6c5c6dcd93c4721"
+    });
+
+    await fireDeviateTracking(data);
+    expect(setupPixel).toHaveBeenCalledWith({...data, userData:{externalId:"bef57ec7f53a6d40beb640a780a639c83bc29ac8a9816f1fc6c5c6dcd93c4721"}});
+  });
 });

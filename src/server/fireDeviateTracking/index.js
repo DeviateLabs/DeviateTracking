@@ -18,12 +18,13 @@ module.exports = async function fireDeviateTracking(data){
     sendServerEvent(data);
   }
 
+  await hashData(data);
+
   //inject and init pixel if necessary
   await setupPixel(data);
 
   //send event directly to facebook
   if (data.sendBrowserEvent){
-    await hashData(data);
     sendBrowserEvent(data);
   }
 };

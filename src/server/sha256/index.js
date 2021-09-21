@@ -1,3 +1,5 @@
+const log = require("../log/index.js");
+
 module.exports = async function sha256(message) {
   //encode as UTF-8
   const msgBuffer = new TextEncoder().encode(message);
@@ -10,5 +12,7 @@ module.exports = async function sha256(message) {
 
   //convert bytes to hex string
   const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+
+  log("SHA256 message", '"'+message+'"', "result", hashHex)
   return hashHex;
 };
