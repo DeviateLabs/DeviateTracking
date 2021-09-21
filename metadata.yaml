@@ -1,8 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/knowledge-base"
 versions:
-  - sha: 90e9a3bdf133c71e754c1d8372da70275d8dac93
-    changeNotes: v5.2.0 Multipixel support.
+  - sha: 21e413268579ae5e033fcf05311ce432df0e4196
+    changeNotes: v5.2.0 Multipixel support. Read more at https://deviatetracking.com/2021/08/26/deviate-tracking-v5-2-0-multipixel-support/
   - sha: 90f76c76881e5aa1a107337fdab87fa933fe66f6
     changeNotes: v5.1.1 Fix manual event id not working.
   - sha: eb8f1e8bc333a3d3099a130efa91216b846eff4e
