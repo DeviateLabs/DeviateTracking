@@ -385,7 +385,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "SELECT",
         "name": "currency",
         "displayName": "currency",
-        "macrosInSelect": false,
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "DZD",
@@ -657,8 +657,8 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "notSetText": "This parameter is required for the Purchase Event",
-        "help": "Unit of the value parameter. Required for the Purchase event.",
+        "notSetText": "",
+        "help": "Unit of the value parameter. Required for the Purchase event. Must match https://developers.facebook.com/docs/marketing-api/currencies/ if using variable.",
         "defaultValue": "USD"
       },
       {
@@ -1393,5 +1393,4 @@ setup: ''
 ___NOTES___
 
 Created on 7/21/2021, 2:09:23 PM
-
 
