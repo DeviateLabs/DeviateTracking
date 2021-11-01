@@ -1,9 +1,13 @@
 const getIp = require("../getIp/index.js");
+const convertDefaults = require("../convertCheckboxDefaults/index.js");
 const convertFalsies = require("../convertFalsies/index.js");
 const uuidv4 = require("../uuidv4/index.js");
 const setFbCookies = require("../setFbCookies/index.js");
 
 module.exports = async function processData(data){
+  //convert undefined variables to their default values (gtm workaround)
+  convertDefaults();
+
   //convert none, automatic, etc to null
   convertFalsies(data);
 
