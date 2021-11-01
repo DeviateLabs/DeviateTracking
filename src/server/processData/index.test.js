@@ -138,6 +138,13 @@ describe("processData", () => {
     let data = {};
 
     await processData(data);
-    expect(data).not.toEqual(expect.objectContaining({"testCode": expect.anything}));
+    expect(data).not.toEqual(expect.objectContaining({"testCode": expect.anything()}));
+  });
+
+  it("sets scriptVersion", async() => {
+    let data = {};
+
+    await processData(data);
+    expect(data).toEqual(expect.objectContaining({"scriptVersion": expect.anything()}));
   });
 });

@@ -5,6 +5,8 @@ const uuidv4 = require("../uuidv4/index.js");
 const setFbCookies = require("../setFbCookies/index.js");
 const getQueryArg = require("../getQueryArg/index.js");
 const log = require("../log/index.js");
+const config = require("../config.js");
+
 module.exports = async function processData(data){
   //convert undefined variables to their default values (gtm workaround)
   convertDefaults();
@@ -44,4 +46,7 @@ module.exports = async function processData(data){
   if (!data.eventId){
     data.eventId = uuidv4();
   }
+
+  //add the script version
+  data.scriptVersion = config.version
 };
