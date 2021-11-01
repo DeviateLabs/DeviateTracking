@@ -2,12 +2,14 @@ jest.mock("../getIp/index.js");
 jest.mock("../convertFalsies/index.js");
 jest.mock("../uuidv4/index.js");
 jest.mock("../setFbCookies/index.js");
+jest.mock("../getQueryArg/index.js");
 
 const processData = require("./index.js");
 const getIp = require("../getIp/index.js");
 const convertFalsies = require("../convertFalsies/index.js");
 const uuidv4 = require("../uuidv4/index.js");
 const setFbCookies = require("../setFbCookies/index.js");
+const getQueryArg = require("../getQueryArg/index.js");
 
 
 beforeEach(() => {
@@ -38,6 +40,10 @@ beforeEach(() => {
 
   setFbCookies.mockImplementation(() => {
     return "fake-guid";
+  });
+
+  getQueryArg.mockImplementation(() => {
+    return null;
   });
 });
 
@@ -115,5 +121,23 @@ describe("processData", () => {
     };
     await processData(data);
     expect(data).toEqual(expect.objectContaining({"eventId": "fake"}));
+  });
+
+  it("sets the testCode if it's in the query arg", async() => {
+    let data = {};
+
+    getQueryArg.mockImplementation(() => {
+      return "TEST12345";
+    });
+
+    await processData(data);
+    expect(data).toEqual(expect.objectContaining({"testCode": "TEST12345"}));
+  });
+
+  it("does not set the testCode if query arg is null", async() => {
+    let data = {};
+
+    await processData(data);
+    expect(data).not.toEqual(expect.objectContaining({"testCode": expect.anything}));
   });
 });

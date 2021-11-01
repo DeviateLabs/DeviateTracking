@@ -3,7 +3,8 @@ const convertDefaults = require("../convertCheckboxDefaults/index.js");
 const convertFalsies = require("../convertFalsies/index.js");
 const uuidv4 = require("../uuidv4/index.js");
 const setFbCookies = require("../setFbCookies/index.js");
-
+const getQueryArg = require("../getQueryArg/index.js");
+const log = require("../log/index.js");
 module.exports = async function processData(data){
   //convert undefined variables to their default values (gtm workaround)
   convertDefaults();
@@ -20,6 +21,13 @@ module.exports = async function processData(data){
   data.eventSourceUrl = window.location.href;
 
   setFbCookies(data);
+
+  //set test code, if there's one in the query arg
+  let testCode = getQueryArg("dtTestCode");
+  if (testCode){
+    log("Overriding test code:", data.testCode, "->", testCode)
+    data.testCode = testCode
+  }
 
   //set ip
   await getIp();

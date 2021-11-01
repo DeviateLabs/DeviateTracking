@@ -38,6 +38,12 @@ Facebook's native partner integrations restrict the types of events you can trac
 
 ## Development
 
-- `npm run build` to compile deviatetracking.js
+- `npm run dev` to compile a development-only deviatetracking.js
+- `npm run build` to compile a production-ready deviatetracking.js
 - `npm run test` to execute the unit tests
 - `npm run coverage` to execute the unit tests and get coverage stats
+
+### Debugging
+Adding these query args will enable additional debugging features.
+- dtdebug=true: enable verbose logging in devtools
+- dtTestCode=\<code\>: override the Facebook test code settings in the tag
