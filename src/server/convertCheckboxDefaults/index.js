@@ -27,6 +27,7 @@ module.exports = function convertCheckboxDefaults(data){
   for(const pair of pairs){
     if (data[pair.key] === undefined){ //yes, this should be undefined ONLY, and not count other falsy values
       data[pair.key] = pair.value;
+      console.log("Converted ", pair.key, data[pair.key], "->", pair.value)
     }
   }
 };
