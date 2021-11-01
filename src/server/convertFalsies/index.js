@@ -1,4 +1,4 @@
-module.exports = function convertDefaults(data){
+module.exports = function convertFalsies(data){
   //convert gtm default values to null
   for (const [key, value] of Object.entries(data)){
     if ((value === "None") || (value === "Automatic") || (value === "EventId")){

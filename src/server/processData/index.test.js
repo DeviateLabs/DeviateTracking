@@ -1,11 +1,11 @@
 jest.mock("../getIp/index.js");
-jest.mock("../convertDefaults/index.js");
+jest.mock("../convertFalsies/index.js");
 jest.mock("../uuidv4/index.js");
 jest.mock("../setFbCookies/index.js");
 
 const processData = require("./index.js");
 const getIp = require("../getIp/index.js");
-const convertDefaults = require("../convertDefaults/index.js");
+const convertFalsies = require("../convertFalsies/index.js");
 const uuidv4 = require("../uuidv4/index.js");
 const setFbCookies = require("../setFbCookies/index.js");
 
@@ -23,7 +23,7 @@ beforeEach(() => {
 
   global.fbq = jest.fn(() => {});
 
-  convertDefaults.mockImplementation((data) => {
+  convertFalsies.mockImplementation((data) => {
     return data;
   });
 

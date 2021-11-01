@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack && ./archive.sh",
-    "dev": "SOURCE_MAP=true webpack",
-    "test": "jest --max-workers=32 --no-cache",
-    "coverage": "jest --coverage --max-workers=32 --no-cache"
+    "build": "clear;webpack && ./archive.sh",
+    "dev": "clear;SOURCE_MAP=true webpack",
+    "test": "clear;jest --max-workers=32 --no-cache",
+    "coverage": "clear;jest --coverage --max-workers=32 --no-cache"
   },
   "repository": {
     "type": "git",
