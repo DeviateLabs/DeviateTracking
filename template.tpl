@@ -38,7 +38,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "Notice",
-    "displayName": "This tracking tag type requires a paid subscription. You you can sign up for a free trial at https://deviatetracking.com",
+    "displayName": "This tag requires a subscription. Sign up for a free trial at deviatetracking.com",
     "enablingConditions": [
       {
         "paramName": "pixelId",
@@ -67,14 +67,14 @@ ___TEMPLATE_PARAMETERS___
     "name": "LicensedEmail",
     "displayName": "Deviate Tracking Email",
     "simpleValueType": true,
-    "help": "This is the email that you used when you purchased a key, if you are getting an error please email us at hello@deviatetracking.com"
+    "help": "This is the email that you used when you purchased a key."
   },
   {
     "type": "TEXT",
     "name": "apiAccessToken",
     "displayName": "Deviate Tracking Key",
     "simpleValueType": true,
-    "help": "This key will be provided to you via email on purchase, if you didn\u0027t receive this, please contact us at customersuccess@deviatetracking.com. \n\nThis is NOT your Deviate Tracking account password."
+    "help": "This is NOT your Deviate Tracking account password. \n\nYour Deviate Tracking API key starts with \"DL\". It should have been provided to you via email when you subscribed to Deviate Tracking.\n\nIf you did not receive a key, please contact us at customersuccess@deviatetracking.com."
   },
   {
     "type": "TEXT",
@@ -171,12 +171,12 @@ ___TEMPLATE_PARAMETERS___
     ],
     "simpleValueType": true,
     "defaultValue": "PageView",
-    "help": "You can use as many different types as you\u0027d like, but Facebook limits their aggregated data set to only up to a maximum of 8 events, which can be set in the event manager. Use the drop down and choose a type of event to track standard events. Standard events also support parameter objects with specific object properties, which allow you to include detailed information about an event. For a full description of events please visit https://developers.facebook.com/docs/facebook-pixel/reference"
+    "help": "You can use as many different types as you\u0027d like, but Facebook limits their aggregated data set to only up to a maximum of 8 events, which can be set in the event manager. Use the drop down and choose a type of event to track standard events. Standard events also support parameter objects with specific object properties, which allow you to include detailed information about an event. \n\nFor a full description of events please visit https://developers.facebook.com/docs/facebook-pixel/reference"
   },
   {
     "type": "LABEL",
     "name": "Purchase Type Notice",
-    "displayName": "**Currency Type and Purchase Value MUST be set in OBJECT PROPERTIES or no events will be submitted**",
+    "displayName": "Currency Type and Purchase Value MUST be set in Object Properties. If either of these are unset, Facebook will ignore your events.",
     "enablingConditions": [
       {
         "paramName": "StandardEvents",
@@ -205,7 +205,7 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Providing an event ID, can help reduce the amount of events that are duplicated when using in conjunction with regular JavaScript FBQ events. We recommend setting a random variable and setting this parameter to it to avoid duplicated event data.",
+        "help": "",
         "defaultValue": "Automatic",
         "enablingConditions": [
           {
@@ -804,7 +804,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "NUMBER"
           }
         ],
-        "notSetText": "This parameter is required for the Purchase Event",
+        "notSetText": "",
         "help": "The value of a user performing this event to the business."
       },
       {
@@ -836,7 +836,7 @@ ___TEMPLATE_PARAMETERS___
         "defaultValue": "None"
       }
     ],
-    "help": "These are extra parameters you can send along with your event, some of which are required by standard events."
+    "help": "These are extra parameters you can send along with your event. Some of them are required by standard events."
   },
   {
     "type": "GROUP",
@@ -847,7 +847,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "LABEL",
         "name": "UserDataNotice",
-        "displayName": "Note that FBC Click ID, FBP Browser Id and user agent are all automatically sent by Deviate Tracking and do not need to be added here."
+        "displayName": "FBC Click ID, FBP Browser ID, and User Agent are automatically sent by Deviate Tracking."
       },
       {
         "type": "TEXT",
@@ -935,14 +935,14 @@ ___TEMPLATE_PARAMETERS___
         "help": "Facebook may not permit user IP addresses to be sent in your country. If you see an error in your Events Manager that says \"Potentially Violating Personal Data Sent to Facebook\", you should disable this feature."
       }
     ],
-    "help": "These user data parameters are used to associate your users with a Facebook account, as well as helping to associate your event conversions with a similar audience.  None of these parameters are required, for more information visit: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#user-data\n\nAll the following information is automatically hashed."
+    "help": "These user data parameters are used to associate your users with a Facebook account, as well as to associate your event conversions with your target audience. These values are optional and will be automatically hashed by Deviate Tracking.\n\nFor more information visit: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#user-data"
   },
   {
     "type": "CHECKBOX",
     "name": "testEventStatus",
     "checkboxText": "Send as a Test Event?",
     "simpleValueType": true,
-    "help": "This enables the use of the the Events Manager test events tool, for more information go here: https://www.facebook.com/business/help/2040882565969969?id\u003d1205376682832142"
+    "help": "This enables the use of the the Events Manager test events tool.\n\nFor more information, see: https://www.facebook.com/business/help/2040882565969969?id\u003d1205376682832142"
   },
   {
     "type": "TEXT",
@@ -956,7 +956,6 @@ ___TEMPLATE_PARAMETERS___
         "type": "EQUALS"
       }
     ],
-    "help": "This should come from your events manager in the testing events section",
     "valueValidators": [
       {
         "type": "NON_EMPTY"
@@ -975,7 +974,7 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Send server event",
         "simpleValueType": true,
         "defaultValue": true,
-        "help": "Send events to Facebook through the Deviate Tracking CAPI server"
+        "help": "Send events to Facebook through the Deviate Tracking CAPI server."
       },
       {
         "type": "CHECKBOX",
@@ -983,7 +982,7 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Send browser event",
         "simpleValueType": true,
         "defaultValue": true,
-        "help": "Send events to Facebook directly from the browser"
+        "help": "Send events to Facebook directly from the browser via a Facebook Pixel."
       },
       {
         "type": "CHECKBOX",
@@ -991,18 +990,18 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Initialize Pixel",
         "simpleValueType": true,
         "defaultValue": true,
-        "help": "Initialize the pixel associated with this tag, if not already initialized"
+        "help": "Initialize the pixel associated with this tag, if not already initialized."
       },
       {
         "type": "CHECKBOX",
         "name": "injectBaseCode",
         "checkboxText": "Inject Base Code",
         "simpleValueType": true,
-        "help": "Inject the Facebook pixel base code, if not already present",
+        "help": "Inject the Facebook pixel base code, if not already present.",
         "defaultValue": true
       }
     ],
-    "help": "The options in this section can break your tracking. Do not change them unless you are absolutely certain that you need to."
+    "help": "The options in this section are for advanced users and can break your tracking setup. Do not change them unless you are absolutely certain that you need to."
   }
 ]
 
@@ -1020,8 +1019,8 @@ const injectScript = require("injectScript");
 const Math = require("Math");
 const getCookieValues = require("getCookieValues");
 
-
 let formattedData = {
+  templateVersion: "5.3.0",
   pixelId: data.pixelId,
   fbToken: data.FBToken,
   dtKey: data.apiAccessToken,
@@ -1393,4 +1392,5 @@ setup: ''
 ___NOTES___
 
 Created on 7/21/2021, 2:09:23 PM
+
 
