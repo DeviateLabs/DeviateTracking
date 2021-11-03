@@ -2,13 +2,13 @@
 
 A GTM Community Tag Template.
 
-Please visit https://deviatetracking.com/ for more information.
-
 Deviate Tracking is a Facebook Conversion API (CAPI) solution packaged as a point-and-click Google Tag Manager (GTM) template. It empowers you to track users -- including iOS 14 users -- in Facebook ads.
 
 Deviate Tracking works by sending conversion data to the Deviate Tracking server, which then forwards it to Facebook. This bypasses the anti-tracking measures employed by Apple in iOS 14. Deviate Tracking offers the advanced features that marketers want, but is also simple to use, requires no programming knowledge, and imports directly into your GTM.
 
 With Deviate Tracking, you can get all the benefits of server-side conversion data without the nerve-wracking hassle of maintaining a server. Install it today to increase your conversions and lower your ad costs.
+
+Please visit https://deviatetracking.com/ for more information.
 
 ## Features
 
@@ -35,15 +35,3 @@ Deviate Tracking works on all Javascript-enabled devices, including Apple, Andro
 ### Advanced Tracking Options
 
 Facebook's native partner integrations restrict the types of events you can track to a pre-defined list. Deviate Tracking includes support for these "standard events" but also allows you to add your own, enabling you to craft powerful and in-depth conversion events. Increasing your marketing ROI has never been easier.
-
-## Development
-
-- `npm run dev` to compile a development-only deviatetracking.js
-- `npm run build` to compile a production-ready deviatetracking.js
-- `npm run test` to execute the unit tests
-- `npm run coverage` to execute the unit tests and get coverage stats
-
-### Debugging
-Adding these query args will enable additional debugging features.
-- dtdebug=true: enable verbose logging in devtools
-- dtTestCode=\<code\>: override the Facebook test code settings in the tag
