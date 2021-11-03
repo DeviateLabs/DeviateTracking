@@ -1,7 +1,7 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/knowledge-base"
 versions:
-  - sha: 4e059e894f69a2a6fdc65fee3bd4b2ea5f9ac3cb
+  - sha: 760b37d6c4b592c41301e0264c28f5c689056fa3
     changeNotes: v5.3.1 Fix undefined checkbox bug, improve in-tag instructions.
   - sha: 61c5c612c6a01ead44cc3b6c4b313fa6a8f5b576
     changeNotes: v5.3.0 Add variable support for the Currency field.
