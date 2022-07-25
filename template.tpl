@@ -74,7 +74,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "apiAccessToken",
     "displayName": "Deviate Tracking Key",
     "simpleValueType": true,
-    "help": "This is NOT your Deviate Tracking account password. \n\nYour Deviate Tracking API key starts with \"DL\". It should have been provided to you via email when you subscribed to Deviate Tracking.\n\nIf you did not receive a key, please contact us at customersuccess@deviatetracking.com."
+    "help": "This is NOT your Deviate Tracking account password. \n\nYour Deviate Tracking API key is a 32-digit alphanumeric string prefixed with \"key_\". (Note: Legacy keys may be of the form DL-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX). Your key should have been provided to you via email when you subscribed to Deviate Tracking.\n\nIf you did not receive a key, please contact us at customersuccess@deviatetracking.com."
   },
   {
     "type": "TEXT",
