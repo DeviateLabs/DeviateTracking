@@ -1064,7 +1064,7 @@ let formattedData = {
     fbLoginId: data.fbLoginId,
   }
 };
-log("template data", formattedData);
+
 injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking-5.2.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   fireDeviateTracking(formattedData);
