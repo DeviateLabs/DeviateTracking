@@ -1020,7 +1020,7 @@ const Math = require("Math");
 const getCookieValues = require("getCookieValues");
 
 let formattedData = {
-  templateVersion: "5.3.2",
+  templateVersion: "5.3.3",
   pixelId: data.pixelId,
   fbToken: data.FBToken,
   dtKey: data.apiAccessToken,
