@@ -1065,7 +1065,7 @@ let formattedData = {
   }
 };
 
-injectScript("https://deviatetracking.com/wp-content/deviatetracking/deviatetracking-5.2.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
+injectScript("https://cdn.jsdelivr.net/gh/DeviateLabs/DeviateTracking/deviatetracking.js?ver=" + (Math.round(getTimestamp() / 1000)), () => {
   const fireDeviateTracking = copyFromWindow("fireDeviateTracking");
   fireDeviateTracking(formattedData);
   data.gtmOnSuccess();
