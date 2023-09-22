@@ -1331,7 +1331,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://deviatetracking.com/wp-content/deviatetracking/*"
+                "string": "https://cdn.jsdelivr.net/gh/DeviateLabs/DeviateTracking/*"
               }
             ]
           }
