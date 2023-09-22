@@ -1,6 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/knowledge-base"
 versions:
+  - sha: 2b613af53239ae7cb5361a9fbc8215927bf84507
+    changeNotes: v5.3.4 Migrate to jsdelivr cdn.
   - sha: 6f153c076c3ad76d095d33fa4961847d718f5e9d
     changeNotes: v5.3.3 Remove potentially sensitive data from default console log.
   - sha: 272ee7d11e2462043ad92cad8701e6a7af0fd303
