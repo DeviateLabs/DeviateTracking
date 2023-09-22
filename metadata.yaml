@@ -1,6 +1,8 @@
 homepage: "https://deviatetracking.com"
 documentation: "https://deviatetracking.com/knowledge-base"
 versions:
+  - sha: 35aaa22a10954d47056df180fe8ca2f5ab36d507
+    changeNotes: v5.3.5 Fix permissions
   - sha: 2b613af53239ae7cb5361a9fbc8215927bf84507
     changeNotes: v5.3.4 Migrate to jsdelivr cdn.
   - sha: 6f153c076c3ad76d095d33fa4961847d718f5e9d
